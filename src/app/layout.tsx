@@ -30,18 +30,18 @@ export const metadata: Metadata = {
   keywords: ["fisioterapia Maricá", "pilates Maricá", "reabilitação Maricá", "clínica de pilates", "fisioterapeuta Maricá", "dor nas costas Maricá", "reabilitação física", "RPG Maricá"],
   authors: [{ name: "Siknode Digital" }],
   alternates: {
-    canonical: "/",
+    canonical: siteUrl,
   },
   openGraph: {
     title: "Clínica de Fisioterapia, Pilates e Reabilitação Maricá | Espaço Reabilitar",
     description: "Recupere sua mobilidade e viva sem dor. Equipe multidisciplinar com tecnologia avançada aplicada à saúde física em Maricá.",
-    url: "https://espacoreabilitarmarica.com.br",
+    url: siteUrl,
     siteName: "Espaço Reabilitar",
     locale: "pt_BR",
     type: "website",
     images: [
       {
-        url: "/images/og-image.jpg",
+        url: `${siteUrl}/images/og-image.jpg`,
         width: 1200,
         height: 630,
         alt: "Espaço Reabilitar Maricá",
@@ -52,7 +52,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Clínica de Fisioterapia, Pilates e Reabilitação Maricá | Espaço Reabilitar",
     description: "Especialistas em fisioterapia moderna, pilates clínico e reabilitação física em Maricá.",
-    images: ["/images/og-image.jpg"],
+    images: [`${siteUrl}/images/og-image.jpg`],
   },
   robots: {
     index: false,
