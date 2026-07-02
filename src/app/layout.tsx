@@ -23,7 +23,7 @@ const spaceGrotesk = Space_Grotesk({
 
 const siteUrl = "https://clinica-fisioterapia-marica.vercel.app";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = { // Force Vercel cache bust
   metadataBase: new URL(siteUrl),
   title: "Clínica de Fisioterapia, Pilates e Reabilitação Maricá | Espaço Reabilitar",
   description: "Especialistas em fisioterapia moderna, pilates clínico, reabilitação física, fonoaudiologia e nutrição em Maricá. Atendimento humanizado e personalizado.",
