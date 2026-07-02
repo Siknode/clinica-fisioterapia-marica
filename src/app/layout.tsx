@@ -21,8 +21,7 @@ const spaceGrotesk = Space_Grotesk({
   display: "swap",
 });
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 
-                (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : "https://espacoreabilitarmarica.com.br");
+const siteUrl = "https://clinica-fisioterapia-marica.vercel.app";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
