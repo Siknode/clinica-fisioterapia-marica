@@ -21,8 +21,11 @@ const spaceGrotesk = Space_Grotesk({
   display: "swap",
 });
 
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 
+                (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : "https://espacoreabilitarmarica.com.br");
+
 export const metadata: Metadata = {
-  metadataBase: new URL("https://espacoreabilitarmarica.com.br"),
+  metadataBase: new URL(siteUrl),
   title: "Clínica de Fisioterapia, Pilates e Reabilitação Maricá | Espaço Reabilitar",
   description: "Especialistas em fisioterapia moderna, pilates clínico, reabilitação física, fonoaudiologia e nutrição em Maricá. Atendimento humanizado e personalizado.",
   keywords: ["fisioterapia Maricá", "pilates Maricá", "reabilitação Maricá", "clínica de pilates", "fisioterapeuta Maricá", "dor nas costas Maricá", "reabilitação física", "RPG Maricá"],
