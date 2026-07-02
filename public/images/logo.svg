@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 70" width="320" height="70">
+  <defs>
+    <style>
+      .logo-text { font-family: 'Space Grotesk', 'Segoe UI', sans-serif; font-size: 20px; font-weight: bold; fill: #1e3a8a; }
+      .logo-sub { font-family: 'Inter', 'Segoe UI', sans-serif; font-size: 9px; font-weight: 800; fill: #0d9488; letter-spacing: 3px; }
+    </style>
+  </defs>
+  <!-- Icon: Abstract physical activity/health wave -->
+  <g transform="translate(5, 5)">
+    <rect width="60" height="60" rx="18" fill="#0d9488" fill-opacity="0.1"/>
+    <path d="M15 30h7l4-15 5 28 4-18 3 5h12" stroke="#0d9488" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+  </g>
+  <!-- Text -->
+  <text x="80" y="33" class="logo-text">ESPAÇO REABILITAR</text>
+  <text x="80" y="49" class="logo-sub">FISIOTERAPIA &amp; PILATES</text>
+</svg>
