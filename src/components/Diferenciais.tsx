@@ -1,33 +1,34 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { Users, UserCheck, Layout, Cpu, Heart } from 'lucide-react';
+import { Users, Stethoscope, Sparkles, Heart, Baby } from 'lucide-react';
 
+// Diferenciais extraídos das legendas do Instagram da clínica
 const DIFERENCIAIS = [
   {
+    icon: Stethoscope,
+    title: 'Pilates com fisioterapeuta',
+    description: 'Cada exercício é orientado por um fisioterapeuta, respeitando as necessidades e os limites de cada pessoa.',
+  },
+  {
     icon: Users,
-    title: 'Equipe Multidisciplinar',
-    description: 'Fisioterapeutas, educadores físicos e nutricionistas trabalhando juntos no seu plano terapêutico.',
+    title: 'Saúde completa em um só lugar',
+    description: 'Pilates, fisioterapia, massoterapia, psicologia, nutrição e psicopedagogia, sem precisar rodar a cidade.',
   },
   {
-    icon: UserCheck,
-    title: 'Atendimento Personalizado',
-    description: 'Sessões individuais focadas no seu diagnóstico específico e evolução contínua.',
-  },
-  {
-    icon: Layout,
-    title: 'Estrutura Premium',
-    description: 'Consultórios privativos, estúdio de Pilates completo e ambiente planejado para o seu conforto.',
-  },
-  {
-    icon: Cpu,
-    title: 'Tecnologia em Reabilitação',
-    description: 'Equipamentos de fotobiomodulação, biofeedback e termografia para otimizar seus resultados.',
+    icon: Baby,
+    title: 'Para toda a família',
+    description: 'Do jiu-jitsu baby e kids ao acompanhamento de adultos e idosos: cuidado para cada fase da vida.',
   },
   {
     icon: Heart,
-    title: 'Ambiente Acolhedor',
-    description: 'Espaço humanizado com foco no bem-estar físico e mental, proporcionando uma experiência leve.',
+    title: 'Atendimento individualizado',
+    description: 'Cada pessoa é compreendida, respeitada e acompanhada de acordo com os seus objetivos.',
+  },
+  {
+    icon: Sparkles,
+    title: 'Ambiente acolhedor',
+    description: 'Limpeza, organização e carinho em cada detalhe para receber alunos e pacientes com conforto.',
   },
 ];
 
@@ -57,7 +58,7 @@ export default function Diferenciais() {
             transition={{ duration: 0.5, delay: 0.1 }}
             className="text-3xl md:text-4xl font-space font-bold text-brand-blue tracking-tight"
           >
-            A excelência que o seu corpo merece
+            Cuidado de verdade, para toda a família
           </motion.h2>
           <motion.p
             initial={{ opacity: 0, y: 15 }}
@@ -66,7 +67,7 @@ export default function Diferenciais() {
             transition={{ duration: 0.5, delay: 0.2 }}
             className="text-sm md:text-base text-brand-muted max-w-2xl mx-auto leading-relaxed"
           >
-            Combinamos ciência médica, cuidado humanizado e infraestrutura de ponta para proporcionar uma jornada de reabilitação inovadora e altamente eficaz.
+            No Espaço Reabilitar, em Cordeirinho, você encontra uma equipe que cuida do corpo e da mente, com acompanhamento profissional em cada etapa.
           </motion.p>
         </div>
 

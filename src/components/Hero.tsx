@@ -2,42 +2,17 @@
 
 import Image from 'next/image';
 import { motion } from 'framer-motion';
-import { ArrowRight, Play, CheckCircle2, ShieldCheck, Users } from 'lucide-react';
-import { useState, useEffect } from 'react';
+import { ArrowRight, HeartHandshake, MapPin, Stethoscope } from 'lucide-react';
+import { whatsappLink } from '@/lib/site';
 
-const STATS = [
-  { label: 'Equipe especializada', value: 15, suffix: '+', desc: 'Profissionais pós-graduados', icon: Users },
-  { label: 'Atendimento humanizado', value: 98, suffix: '%', desc: 'Satisfação de pacientes', icon: CheckCircle2 },
-  { label: 'Estrutura moderna', value: 350, suffix: 'm²', desc: 'Espaço planejado e climatizado', icon: ShieldCheck },
+// Destaques reais tirados do Instagram da clínica (sem números inventados)
+const HIGHLIGHTS = [
+  { label: 'Equipe multidisciplinar', icon: Stethoscope },
+  { label: 'Saúde para toda família', icon: HeartHandshake },
+  { label: 'Cordeirinho, Maricá', icon: MapPin },
 ];
 
 export default function Hero() {
-  const [counts, setCounts] = useState(STATS.map(() => 0));
-
-  useEffect(() => {
-    const duration = 2000; // 2 seconds
-    const steps = 50;
-    const stepTime = duration / steps;
-
-    let currentStep = 0;
-    const interval = setInterval(() => {
-      currentStep++;
-      setCounts(
-        STATS.map((stat) => {
-          const target = stat.value;
-          const current = Math.round((target / steps) * currentStep);
-          return current > target ? target : current;
-        })
-      );
-
-      if (currentStep >= steps) {
-        clearInterval(interval);
-      }
-    }, stepTime);
-
-    return () => clearInterval(interval);
-  }, []);
-
   return (
     <section className="relative lg:min-h-screen flex items-center justify-center pt-28 sm:pt-32 lg:pt-40 pb-12 md:pb-16 overflow-hidden bg-gradient-to-br from-brand-light via-white to-brand-blue-light/20">
       {/* Decorative background blurs */}
@@ -54,7 +29,7 @@ export default function Hero() {
             className="inline-flex items-center gap-2 px-3 sm:px-4 py-2 rounded-full bg-brand-purple/10 border border-brand-purple/20 text-brand-purple text-[10px] sm:text-xs font-bold tracking-wide uppercase"
           >
             <span className="w-2 h-2 shrink-0 rounded-full bg-brand-purple animate-ping" />
-            Clínica de Fisioterapia e Pilates em Maricá
+            Pilates • Fisioterapia • Bem-estar em Maricá
           </motion.div>
 
           <motion.h1
@@ -73,7 +48,7 @@ export default function Hero() {
             transition={{ duration: 0.7, delay: 0.2 }}
             className="text-base md:text-lg text-brand-muted font-sans font-normal leading-relaxed max-w-2xl mx-auto lg:mx-0"
           >
-            Especialistas em fisioterapia baseada em evidência, pilates clínico, reabilitação e bem-estar para todas as fases da vida. Sua recuperação começa com um diagnóstico preciso e atendimento humanizado.
+            Pilates com acompanhamento de fisioterapeuta, fisioterapia, massoterapia, psicologia, nutrição, psicopedagogia e jiu-jitsu kids no mesmo lugar. Cuidado de verdade para cada fase da vida da sua família.
           </motion.p>
 
           {/* Action buttons */}
@@ -84,7 +59,7 @@ export default function Hero() {
             className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4"
           >
             <a
-              href="https://wa.me/5521968993480?text=Olá!%20Gostaria%20de%20agendar%20uma%20avaliação%20no%20Espaço%20Reabilitar."
+              href={whatsappLink()}
               target="_blank"
               rel="noopener noreferrer"
               className="w-full sm:w-auto flex items-center justify-center gap-2 bg-brand-purple hover:bg-brand-purple-dark text-white px-8 py-4 rounded-full text-sm font-bold shadow-lg shadow-brand-purple/10 hover:shadow-xl hover:shadow-brand-purple/20 hover:scale-102 transition-all duration-300 group"
@@ -96,34 +71,26 @@ export default function Hero() {
               href="#especialidades"
               className="w-full sm:w-auto flex items-center justify-center gap-2 bg-white hover:bg-slate-50 border border-slate-200 text-brand-blue px-8 py-4 rounded-full text-sm font-bold shadow-sm hover:shadow transition-all duration-300"
             >
-              <span>Conheça nossos Serviços</span>
+              <span>Conheça nossos serviços</span>
             </a>
           </motion.div>
 
-          {/* Interactive animated stat indicators */}
-          <motion.div
+          {/* Destaques */}
+          <motion.ul
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.8, delay: 0.5 }}
-            className="grid grid-cols-3 gap-2 sm:gap-4 pt-6 border-t border-slate-200/60 max-w-lg mx-auto lg:mx-0"
+            className="flex flex-wrap justify-center lg:justify-start gap-x-5 gap-y-3 pt-6 border-t border-slate-200/60"
           >
-            {STATS.map((stat, idx) => {
-              return (
-                <div key={idx} className="text-center lg:text-left space-y-1">
-                  <div className="flex items-center justify-center lg:justify-start gap-1.5 text-brand-blue font-space font-bold text-xl md:text-2xl">
-                    <span>{counts[idx]}</span>
-                    <span className="text-brand-purple">{stat.suffix}</span>
-                  </div>
-                  <div className="text-[10px] md:text-xs font-bold tracking-wide text-brand-blue uppercase leading-tight">
-                    {stat.label}
-                  </div>
-                  <div className="text-[9px] md:text-[10px] text-brand-muted hidden sm:block">
-                    {stat.desc}
-                  </div>
-                </div>
-              );
-            })}
-          </motion.div>
+            {HIGHLIGHTS.map(({ label, icon: Icon }) => (
+              <li key={label} className="flex items-center gap-2 text-xs sm:text-sm font-semibold text-brand-blue">
+                <span className="w-8 h-8 rounded-lg bg-brand-purple/10 text-brand-purple flex items-center justify-center shrink-0">
+                  <Icon className="w-4 h-4" />
+                </span>
+                {label}
+              </li>
+            ))}
+          </motion.ul>
         </div>
 
         {/* Right Visual Image Container */}
@@ -136,11 +103,11 @@ export default function Hero() {
           >
             {/* Elegant Background Image */}
             <Image
-              src="https://images.unsplash.com/photo-1599447421416-3414500d18a5?q=80&w=1200&auto=format&fit=crop"
-              alt="Pilates Clínico e Reabilitação em Maricá"
+              src="/images/clinic_10.jpg"
+              alt="Aluna fazendo Pilates no Espaço Reabilitar, em Cordeirinho"
               fill
               preload
-              sizes="(min-width: 1024px) 448px, (min-width: 640px) 448px, 384px"
+              sizes="(min-width: 640px) 448px, 384px"
               className="object-cover transition-transform duration-700 hover:scale-105"
             />
             {/* Overlay Gradient */}
@@ -155,30 +122,17 @@ export default function Hero() {
             >
               <div className="flex items-start gap-3">
                 <div className="p-2.5 rounded-xl bg-brand-purple/10 text-brand-purple">
-                  <ShieldCheck className="w-5 h-5" />
+                  <Stethoscope className="w-5 h-5" />
                 </div>
                 <div>
-                  <h4 className="font-space font-bold text-sm text-brand-blue">Espaço Pilates Premium</h4>
+                  <h4 className="font-space font-bold text-sm text-brand-blue">Pilates com fisioterapeuta</h4>
                   <p className="text-[11px] text-brand-muted mt-0.5 leading-relaxed">
-                    Equipamentos alemães de última geração e ambiente climatizado com luz natural para sua total segurança.
+                    Cada exercício é orientado por um fisioterapeuta, respeitando as necessidades e os limites de cada pessoa.
                   </p>
                 </div>
               </div>
             </motion.div>
 
-            {/* Floating Play Indicator Button */}
-            <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-              <span className="w-16 h-16 rounded-full bg-white/30 backdrop-blur-md flex items-center justify-center animate-ping absolute" />
-              <button
-                className="w-16 h-16 rounded-full bg-white hover:bg-brand-purple text-brand-blue hover:text-white shadow-xl flex items-center justify-center transition-all duration-300 pointer-events-auto"
-                aria-label="Ver vídeo corporativo"
-                onClick={() => {
-                  alert("Vídeo institucional em produção. Em breve novidades!");
-                }}
-              >
-                <Play className="w-5 h-5 fill-current ml-1" />
-              </button>
-            </div>
           </motion.div>
         </div>
       </div>

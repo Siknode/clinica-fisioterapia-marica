@@ -2,7 +2,8 @@
 
 import { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence, useInView } from 'framer-motion';
-import { Bot, User, RefreshCw, MessageSquareCode, CheckCircle2 } from 'lucide-react';
+import { Bot, User, RefreshCw, CheckCircle2 } from 'lucide-react';
+import ExemploBadge from '@/components/ExemploBadge';
 
 interface Message {
   id: string;
@@ -15,7 +16,7 @@ const CHAT_FLOW: { sender: 'patient' | 'ia'; text: string }[] = [
   { sender: 'patient', text: 'Tenho dores na coluna.' },
   { sender: 'ia', text: 'Vou ajudá-lo com isso. Há quanto tempo você sente essa dor?' },
   { sender: 'patient', text: 'Há três semanas.' },
-  { sender: 'ia', text: 'Entendi. Dores na coluna por mais de duas semanas merecem atenção. Nossa equipe multidisciplinar poderá direcionar você para o profissional e tratamento ideal (como fisioterapia ou pilates).' },
+  { sender: 'ia', text: 'Entendi. Dores na coluna por mais de duas semanas merecem atenção. Nossos fisioterapeutas podem avaliar você e indicar o melhor caminho, como fisioterapia ou Pilates.' },
   { sender: 'ia', text: 'Deseja agendar sua avaliação física agora mesmo?' }
 ];
 
@@ -67,28 +68,25 @@ export default function AssistenteIA() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center">
         {/* Left text column */}
         <div className="lg:col-span-5 space-y-6 text-center lg:text-left">
-          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-brand-blue/5 border border-brand-blue/10 text-brand-blue text-xs font-bold uppercase tracking-widest">
-            <MessageSquareCode className="w-3.5 h-3.5" />
-            Inovação Tecnológica
-          </div>
+          <ExemploBadge>Exemplo: atendimento automático</ExemploBadge>
           <h2 className="text-3xl md:text-4xl font-space font-bold text-brand-blue tracking-tight leading-tight">
-            Assistente Inteligente para Triagem Rápida
+            Atendimento rápido, até fora do horário
           </h2>
           <p className="text-sm md:text-base text-brand-muted leading-relaxed font-sans">
-            Desenvolvemos um sistema inteligente de triagem que analisa seus sintomas iniciais e direciona você diretamente para a especialidade correta de nossa clínica.
+            Um assistente no WhatsApp pode tirar as primeiras dúvidas, entender o que a pessoa procura e encaminhar para o serviço certo, sem deixar ninguém esperando.
           </p>
           <div className="space-y-3 hidden lg:block">
             <div className="flex items-center gap-2.5 text-xs font-semibold text-slate-700">
               <CheckCircle2 className="w-4.5 h-4.5 text-brand-purple" />
-              <span>Redução do tempo de espera</span>
+              <span>Resposta imediata, a qualquer hora</span>
             </div>
             <div className="flex items-center gap-2.5 text-xs font-semibold text-slate-700">
               <CheckCircle2 className="w-4.5 h-4.5 text-brand-purple" />
-              <span>Direcionamento clínico preciso</span>
+              <span>Encaminha para o serviço certo</span>
             </div>
             <div className="flex items-center gap-2.5 text-xs font-semibold text-slate-700">
               <CheckCircle2 className="w-4.5 h-4.5 text-brand-purple" />
-              <span>Integração imediata com nosso WhatsApp</span>
+              <span>Continua a conversa no WhatsApp da clínica</span>
             </div>
           </div>
         </div>
@@ -111,7 +109,7 @@ export default function AssistenteIA() {
                   <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 border border-brand-dark absolute bottom-0 right-0 animate-pulse" />
                 </div>
                 <div>
-                  <h3 className="font-space font-bold text-[13px] sm:text-sm text-white leading-tight truncate">Triagem Virtual Espaço Reabilitar</h3>
+                  <h3 className="font-space font-bold text-[13px] sm:text-sm text-white leading-tight truncate">Assistente Espaço Reabilitar</h3>
                   <span className="text-[10px] text-slate-400 font-sans mt-1 inline-block">Online &bull; Responde instantaneamente</span>
                 </div>
               </div>
@@ -205,12 +203,12 @@ export default function AssistenteIA() {
                     className="w-full flex items-center justify-center gap-2 bg-slate-800 hover:bg-slate-700 text-slate-300 py-3.5 rounded-2xl text-xs font-semibold transition-all cursor-pointer"
                   >
                     <RefreshCw className="w-3.5 h-3.5" />
-                    <span>Recomeçar Triagem Simulada</span>
+                    <span>Ver a simulação de novo</span>
                   </button>
                 </motion.div>
               ) : (
                 <div className="flex items-center justify-between gap-3 text-xs text-slate-500 font-sans px-2">
-                  <span className="truncate">Simulando triagem automática...</span>
+                  <span className="truncate">Simulação de atendimento...</span>
                   <div className="flex items-center gap-1.5 shrink-0">
                     <span className="w-2.5 h-2.5 rounded-full bg-brand-purple animate-pulse" />
                     <span>Interativo</span>

@@ -1,35 +1,31 @@
 'use client';
 
 import { useState } from 'react';
-import Image from 'next/image';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Star, MessageSquare, ChevronLeft, ChevronRight, Check } from 'lucide-react';
+import { Star, MessageSquare, ChevronLeft, ChevronRight, UserRound } from 'lucide-react';
+import ExemploBadge from '@/components/ExemploBadge';
 
+// Seção de possibilidade: mostra como os depoimentos reais (ex.: avaliações do Google) vão aparecer.
+// Os textos abaixo são ilustrativos e não atribuídos a pessoas reais.
 const TESTIMONIALS = [
   {
-    name: 'Roberto Souza',
-    location: 'Maricá, RJ',
-    treatment: 'Fisioterapia para Dor Lombar',
-    text: 'Cheguei à clínica quase sem conseguir andar devido a uma crise forte de hérnia de disco. O atendimento do Dr. Thiago foi excepcional. Em poucas sessões eu já não sentia dor e agora faço Pilates para manutenção. Excelente equipe!',
+    name: 'Depoimento de aluno(a)',
+    treatment: 'Pilates',
+    text: 'Aqui aparece o depoimento de um aluno de Pilates contando como as aulas com acompanhamento de fisioterapeuta ajudaram na postura e nas dores do dia a dia.',
     rating: 5,
-    avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=100&auto=format&fit=crop'
   },
   {
-    name: 'Ana Carolina Mendes',
-    location: 'Maricá, RJ',
-    treatment: 'Pilates Clínico e Postura',
-    text: 'O estúdio de Pilates é maravilhoso, com aparelhos novos e iluminação incrível. As instrutoras são super atenciosas e acompanham cada movimento de perto para garantir que eu faça o exercício correto. Minha postura melhorou 100%.',
+    name: 'Depoimento de paciente',
+    treatment: 'Fisioterapia',
+    text: 'Aqui aparece o relato de um paciente sobre a recuperação dos movimentos e a volta às atividades com mais independência e menos dor.',
     rating: 5,
-    avatar: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=100&auto=format&fit=crop'
   },
   {
-    name: 'Carlos Eduardo Santos',
-    location: 'Maricá, RJ',
-    treatment: 'Reabilitação de Joelho (Pós-Operatório)',
-    text: 'Fiz minha reabilitação pós-cirurgia de ligamento cruzado do joelho na Espaço Reabilitar. A infraestrutura é completa e a integração com o nutricionista me ajudou demais a recuperar massa magra. Voltei a correr antes do tempo previsto!',
+    name: 'Depoimento de família',
+    treatment: 'Jiu-jitsu Kids e Psicopedagogia',
+    text: 'Aqui aparece a opinião de uma família sobre o desenvolvimento das crianças nas aulas e no acompanhamento do Espaço Reabilitar.',
     rating: 5,
-    avatar: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=100&auto=format&fit=crop'
-  }
+  },
 ];
 
 export default function Resultados() {
@@ -52,12 +48,15 @@ export default function Resultados() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center">
         {/* Left Column: Google Reviews summary */}
         <div className="lg:col-span-5 space-y-6 text-center lg:text-left">
-          <span className="text-xs font-bold tracking-widest text-brand-green uppercase">Resultados Reais</span>
+          <div className="flex flex-col items-center lg:items-start gap-3">
+            <ExemploBadge>Exemplo: depoimentos dos pacientes</ExemploBadge>
+            <span className="text-xs font-bold tracking-widest text-brand-green uppercase">Depoimentos</span>
+          </div>
           <h2 className="text-3xl md:text-4xl font-space font-bold text-brand-blue tracking-tight leading-tight">
-            A opinião de quem confia em nosso trabalho
+            Quem passa por aqui, recomenda
           </h2>
           <p className="text-sm md:text-base text-brand-muted leading-relaxed max-w-md mx-auto lg:mx-0">
-            A nossa maior recompensa é ver a evolução, superação e o sorriso de quem passa pela nossa clínica todos os dias.
+            Nesta seção entram as avaliações reais dos pacientes, que ajudam novas famílias a escolherem o Espaço Reabilitar com confiança.
           </p>
 
           {/* Google Review Card */}
@@ -73,20 +72,9 @@ export default function Resultados() {
                 ))}
               </div>
             </div>
-            <div className="pt-4 flex items-center justify-between">
-              <div>
-                <div className="text-3xl font-space font-bold text-brand-blue">5.0</div>
-                <div className="text-[10px] font-bold text-brand-muted uppercase tracking-wider mt-0.5">Nota média geral</div>
-              </div>
-              <div className="text-right">
-                <div className="text-sm font-semibold text-brand-green flex items-center justify-end gap-1">
-                  <Check className="w-4 h-4" /> Avaliações Reais
-                </div>
-                <div className="text-[10px] font-bold text-brand-muted uppercase tracking-wider mt-0.5">
-                  Google Reviews
-                </div>
-              </div>
-            </div>
+            <p className="pt-4 text-xs text-brand-muted leading-relaxed">
+              As avaliações do Google da clínica podem ser exibidas aqui automaticamente, com nota média e comentários.
+            </p>
           </div>
         </div>
 
@@ -126,19 +114,13 @@ export default function Resultados() {
 
                 {/* Patient Profile */}
                 <div className="flex items-center gap-4 pt-4 border-t border-slate-100">
-                  <div className="relative w-12 h-12 rounded-full overflow-hidden shrink-0 border border-slate-200">
-                    <Image
-                      src={TESTIMONIALS[activeIdx].avatar}
-                      alt={TESTIMONIALS[activeIdx].name}
-                      fill
-                      sizes="48px"
-                      className="object-cover"
-                    />
+                  <div className="w-12 h-12 rounded-full shrink-0 bg-slate-100 border border-slate-200 flex items-center justify-center text-slate-400">
+                    <UserRound className="w-6 h-6" />
                   </div>
                   <div>
                     <h4 className="font-space font-bold text-sm text-brand-blue">{TESTIMONIALS[activeIdx].name}</h4>
                     <div className="text-[10px] text-brand-muted mt-0.5">
-                      {TESTIMONIALS[activeIdx].treatment} &bull; {TESTIMONIALS[activeIdx].location}
+                      {TESTIMONIALS[activeIdx].treatment}
                     </div>
                   </div>
                 </div>

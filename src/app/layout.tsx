@@ -3,6 +3,7 @@ import { Inter, Manrope, Space_Grotesk } from "next/font/google";
 import "./globals.css";
 import LenisProvider from "@/components/LenisProvider";
 import WhatsAppFlutuante from "@/components/WhatsAppFlutuante";
+import { site } from "@/lib/site";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -30,18 +31,18 @@ export const viewport: Viewport = {
 
 const siteUrl = "https://clinica-fisioterapia-marica.vercel.app";
 
-export const metadata: Metadata = { // Force Vercel cache bust
+export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: "Clínica de Fisioterapia, Pilates e Reabilitação Maricá | Espaço Reabilitar",
-  description: "Especialistas em fisioterapia moderna, pilates clínico, reabilitação física, fonoaudiologia e nutrição em Maricá. Atendimento humanizado e personalizado.",
-  keywords: ["fisioterapia Maricá", "pilates Maricá", "reabilitação Maricá", "clínica de pilates", "fisioterapeuta Maricá", "dor nas costas Maricá", "reabilitação física", "RPG Maricá"],
+  description: "Pilates com fisioterapeuta, fisioterapia, massoterapia, psicologia, nutrição, psicopedagogia e jiu-jitsu kids em Cordeirinho, Maricá. Saúde completa para toda família.",
+  keywords: ["fisioterapia Maricá", "pilates Maricá", "pilates Cordeirinho", "massoterapia Maricá", "psicologia Maricá", "nutricionista Maricá", "psicopedagogia Maricá", "jiu-jitsu kids Maricá"],
   authors: [{ name: "Siknode Digital" }],
   alternates: {
     canonical: siteUrl,
   },
   openGraph: {
     title: "Clínica de Fisioterapia, Pilates e Reabilitação Maricá | Espaço Reabilitar",
-    description: "Recupere sua mobilidade e viva sem dor. Equipe multidisciplinar com tecnologia avançada aplicada à saúde física em Maricá.",
+    description: "Pilates com fisioterapeuta, fisioterapia, massoterapia, psicologia, nutrição e mais em Cordeirinho, Maricá. Saúde completa para toda família.",
     url: siteUrl,
     siteName: "Espaço Reabilitar",
     locale: "pt_BR",
@@ -58,13 +59,11 @@ export const metadata: Metadata = { // Force Vercel cache bust
   twitter: {
     card: "summary_large_image",
     title: "Clínica de Fisioterapia, Pilates e Reabilitação Maricá | Espaço Reabilitar",
-    description: "Especialistas em fisioterapia moderna, pilates clínico e reabilitação física em Maricá.",
+    description: "Pilates com fisioterapeuta, fisioterapia e saúde completa para toda família em Cordeirinho, Maricá.",
     images: [`${siteUrl}/images/og-image.jpg`],
   },
-  robots: {
-    index: false,
-    follow: false,
-  },
+  // Site de prospecção: fica fora do Google até a clínica aprovar (ver src/lib/site.ts)
+  robots: site.preview ? { index: false, follow: false } : undefined,
 };
 
 export default function RootLayout({
@@ -72,47 +71,23 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  // Schema LocalBusiness em formato JSON-LD com dados reais da clínica
+  // Schema LocalBusiness com dados conferidos no Instagram da clínica
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "MedicalClinic",
-    "name": "Espaço Reabilitar - Clínica de Fisioterapia, Pilates e Reabilitação",
-    "alternateName": "Clínica Espaço Reabilitar Maricá",
-    "description": "Clínica premium especializada em Fisioterapia, Pilates Clínico, Fonoaudiologia, Nutrição e Reabilitação Física de Alta Performance em Maricá.",
-    "url": "https://espacoreabilitarmarica.com.br",
-    "telephone": "+5521968993480",
+    "name": site.name,
+    "description": "Pilates com fisioterapeuta, fisioterapia, massoterapia, psicologia, nutrição, psicopedagogia e jiu-jitsu kids em Cordeirinho, Maricá.",
+    "url": siteUrl,
+    "telephone": `+${site.phoneE164}`,
     "address": {
       "@type": "PostalAddress",
-      "streetAddress": "Av. Maysa, entre a rua 87 e 88 - Cordeirinho",
-      "addressLocality": "Maricá",
-      "addressRegion": "RJ",
-      "postalCode": "24921-456",
+      "streetAddress": `${site.address.street} - ${site.address.district}`,
+      "addressLocality": site.address.city,
+      "addressRegion": site.address.state,
+      "postalCode": site.address.postalCode,
       "addressCountry": "BR"
     },
-    "geo": {
-      "@type": "GeoCoordinates",
-      "latitude": -22.95577,
-      "longitude": -42.74475
-    },
-    "hasMap": "https://maps.google.com/?q=26VV%2B72+Maric%C3%A1,+Rio+de+Janeiro",
-    "openingHoursSpecification": [
-      {
-        "@type": "OpeningHoursSpecification",
-        "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
-        "opens": "07:00",
-        "closes": "21:00"
-      },
-      {
-        "@type": "OpeningHoursSpecification",
-        "dayOfWeek": ["Saturday"],
-        "opens": "08:00",
-        "closes": "12:00"
-      }
-    ],
-    "sameAs": [
-      "https://www.instagram.com/espacoreabilitarmarica",
-      "https://facebook.com/espacoreabilitarmarica"
-    ]
+    "sameAs": [site.instagramUrl]
   };
 
   return (

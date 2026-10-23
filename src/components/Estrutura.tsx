@@ -5,70 +5,56 @@ import Image from 'next/image';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X, Maximize2, ChevronLeft, ChevronRight, Images } from 'lucide-react';
 
+// Fotos reais do Instagram da clínica
 const GRID_ITEMS = [
   {
-    src: '/images/clinic_1.jpg',
-    title: 'Estúdio de Pilates Clínico',
-    desc: 'Equipamentos modernos e espaços amplos com iluminação natural para o seu treino.',
+    src: '/images/clinic_7.webp',
+    title: 'Pilates',
+    desc: 'Aulas com acompanhamento de fisioterapeuta, respeitando o ritmo de cada aluno.',
     gridClass: 'col-span-2 md:col-span-2',
     lightboxStartIdx: 0,
   },
   {
     src: '/images/clinic_2.webp',
-    title: 'Consultórios Privativos',
-    desc: 'Salas individuais para avaliação física e sessões de fisioterapia especializada.',
+    title: 'Fisioterapia',
+    desc: 'Atendimento individual para aliviar dores e recuperar movimentos.',
     gridClass: 'col-span-1 md:col-span-1',
     lightboxStartIdx: 1,
   },
   {
-    src: '/images/clinic_3.jpg',
-    title: 'Área de Reabilitação Física',
-    desc: 'Espaço equipado para cinesioterapia e recondicionamento motor de alta performance.',
+    src: '/images/clinic_1.jpg',
+    title: 'Nossa fachada',
+    desc: 'Espaço Reabilitar e CTS Cordeirinho, na Av. Maysa, em Cordeirinho.',
     gridClass: 'col-span-1 md:col-span-3',
-    lightboxStartIdx: 2,
+    lightboxStartIdx: 4,
   },
 ];
 
 const LIGHTBOX_IMAGES = [
   {
-    src: '/images/clinic_1.jpg',
-    title: 'Estúdio de Pilates Clínico',
-    desc: 'Equipamentos modernos e espaços amplos com iluminação natural para o seu treino.',
+    src: '/images/clinic_7.webp',
+    title: 'Pilates',
+    desc: 'Aulas com acompanhamento de fisioterapeuta, respeitando o ritmo de cada aluno.',
   },
   {
     src: '/images/clinic_2.webp',
-    title: 'Consultórios Privativos',
-    desc: 'Salas individuais para avaliação física e sessões de fisioterapia especializada.',
+    title: 'Fisioterapia',
+    desc: 'Atendimento individual para aliviar dores e recuperar movimentos.',
   },
   {
-    src: '/images/clinic_3.jpg',
-    title: 'Área de Reabilitação Física',
-    desc: 'Espaço equipado para cinesioterapia e recondicionamento motor de alta performance.',
+    src: '/images/clinic_10.jpg',
+    title: 'Pilates nos aparelhos',
+    desc: 'Exercícios orientados para força, mobilidade e consciência corporal.',
   },
   {
-    src: '/images/clinic_4.webp',
-    title: 'Pilates Clínico e Reabilitação',
-    desc: 'Ambiente aconchegante focado na melhora da mobilidade e alívio de dores.',
+    src: '/images/clinic_9.jpg',
+    title: 'Alongamento e mobilidade',
+    desc: 'Movimento com calma e orientação, respeitando os limites do corpo.',
   },
   {
-    src: '/images/clinic_5.webp',
-    title: 'Equipamentos de Pilates',
-    desc: 'Estrutura completa com aparelhos modernos para exercícios de fortalecimento e flexibilidade.',
-  },
-  {
-    src: '/images/clinic_6.jpg',
-    title: 'Atendimento Personalizado',
-    desc: 'Fisioterapeutas especializados que acompanham cada movimento da sua evolução.',
-  },
-  {
-    src: '/images/clinic_7.webp',
-    title: 'Sala de Fisioterapia e RPG',
-    desc: 'Salas equipadas para correção postural, RPG e cinesioterapia individualizada.',
-  },
-  {
-    src: '/images/clinic_8.webp',
-    title: 'Recepção e Acolhimento',
-    desc: 'Ambiente climatizado e confortável preparado para receber você com toda a atenção.',
+    src: '/images/clinic_1.jpg',
+    title: 'Nossa fachada',
+    desc: 'Espaço Reabilitar e CTS Cordeirinho, na Av. Maysa, em Cordeirinho.',
   },
 ];
 
@@ -124,7 +110,7 @@ export default function Estrutura() {
             transition={{ duration: 0.5, delay: 0.1 }}
             className="text-3xl md:text-4xl font-space font-bold text-brand-blue tracking-tight"
           >
-            Espaço de saúde projetado para o seu bem-estar
+            Conheça o nosso espaço
           </motion.h2>
           <motion.p
             initial={{ opacity: 0, y: 15 }}
@@ -133,7 +119,7 @@ export default function Estrutura() {
             transition={{ duration: 0.5, delay: 0.2 }}
             className="text-sm md:text-base text-brand-muted max-w-2xl mx-auto leading-relaxed"
           >
-            Oferecemos uma infraestrutura de ponta, climatizada, com iluminação natural planejada e equipamentos modernos para garantir sua segurança e conforto.
+            Um ambiente limpo, organizado e acolhedor, preparado com carinho para receber alunos, pacientes e suas famílias.
           </motion.p>
         </div>
 

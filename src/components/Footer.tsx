@@ -1,7 +1,8 @@
 'use client';
 
 import Image from 'next/image';
-import { Instagram, Mail, MapPin, Phone, MessageCircle } from 'lucide-react';
+import { Instagram, MapPin, Phone, MessageCircle, CalendarCheck } from 'lucide-react';
+import { site, whatsappLink } from '@/lib/site';
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
@@ -30,11 +31,11 @@ export default function Footer() {
             />
           </a>
           <p className="text-sm text-slate-300 leading-relaxed max-w-sm">
-            Especialistas em redefinir a sua saúde física por meio de fisioterapia avançada, pilates clínico e reabilitação personalizada.
+            Pilates, fisioterapia, massoterapia, psicologia, nutrição, psicopedagogia e jiu-jitsu kids em Cordeirinho, Maricá. Saúde completa para toda família.
           </p>
           <div className="flex gap-4">
             <a
-              href="https://instagram.com/espacoreabilitarmarica"
+              href={site.instagramUrl}
               target="_blank"
               rel="noopener noreferrer"
               className="w-10 h-10 rounded-full bg-white/5 border border-white/10 hover:border-brand-purple/30 hover:bg-brand-purple/10 flex items-center justify-center text-slate-300 hover:text-white transition-all duration-300"
@@ -43,7 +44,7 @@ export default function Footer() {
               <Instagram className="w-4 h-4" />
             </a>
             <a
-              href="https://wa.me/5521968993480"
+              href={whatsappLink()}
               target="_blank"
               rel="noopener noreferrer"
               className="w-10 h-10 rounded-full bg-white/5 border border-white/10 hover:border-brand-purple/30 hover:bg-brand-purple/10 flex items-center justify-center text-slate-300 hover:text-white transition-all duration-300"
@@ -62,16 +63,19 @@ export default function Footer() {
               <a href="#diferenciais" className="text-slate-300 hover:text-white transition-colors duration-200">Diferenciais</a>
             </li>
             <li>
-              <a href="#especialidades" className="text-slate-300 hover:text-white transition-colors duration-200">Especialidades</a>
+              <a href="#especialidades" className="text-slate-300 hover:text-white transition-colors duration-200">Serviços</a>
             </li>
             <li>
               <a href="#para-quem" className="text-slate-300 hover:text-white transition-colors duration-200">Para Quem é</a>
             </li>
             <li>
-              <a href="#estrutura" className="text-slate-300 hover:text-white transition-colors duration-200">Estrutura</a>
+              <a href="#estrutura" className="text-slate-300 hover:text-white transition-colors duration-200">Nosso espaço</a>
             </li>
             <li>
-              <a href="#equipe" className="text-slate-300 hover:text-white transition-colors duration-200">Equipe</a>
+              <a href="#blog" className="text-slate-300 hover:text-white transition-colors duration-200">Dicas</a>
+            </li>
+            <li>
+              <a href="#contato" className="text-slate-300 hover:text-white transition-colors duration-200">Contato</a>
             </li>
           </ul>
         </div>
@@ -88,38 +92,45 @@ export default function Footer() {
                 CEP: 24921-456
               </span>
             </li>
-            <li className="flex items-center gap-3">
-              <Phone className="w-4 h-4 text-brand-purple shrink-0" />
-              <a href="tel:+5521968993480" className="text-slate-300 hover:text-white transition-colors">
-                (21) 96899-3480
-              </a>
-            </li>
             <li className="flex items-start gap-3">
-              <Mail className="w-4 h-4 text-brand-purple shrink-0 mt-0.5" />
-              <a href="mailto:contato@espacoreabilitarmarica.com.br" className="text-slate-300 hover:text-white transition-colors break-all">
-                contato@espacoreabilitarmarica.com.br
+              <Phone className="w-4 h-4 text-brand-purple shrink-0 mt-0.5" />
+              <span className="flex flex-col gap-1">
+                <a href={`tel:+${site.phoneE164}`} className="text-slate-300 hover:text-white transition-colors">{site.phoneDisplay}</a>
+                <a href={`tel:+${site.phone2E164}`} className="text-slate-300 hover:text-white transition-colors">{site.phone2Display}</a>
+              </span>
+            </li>
+            <li className="flex items-center gap-3">
+              <Instagram className="w-4 h-4 text-brand-purple shrink-0" />
+              <a href={site.instagramUrl} target="_blank" rel="noopener noreferrer" className="text-slate-300 hover:text-white transition-colors">
+                @{site.instagram}
               </a>
             </li>
           </ul>
         </div>
 
-        {/* Hours Column */}
+        {/* Agendamento Column */}
         <div>
-          <h3 className="text-sm font-space font-bold tracking-wider text-brand-purple uppercase mb-6">Funcionamento</h3>
-          <ul className="space-y-3 text-sm text-slate-300">
-            <li className="flex justify-between border-b border-white/5 pb-2">
-              <span>Segunda a Sexta</span>
-              <span className="font-semibold text-white">07:00 - 21:00</span>
-            </li>
-            <li className="flex justify-between border-b border-white/5 pb-2">
-              <span>Sábado</span>
-              <span className="font-semibold text-white">08:00 - 12:00</span>
-            </li>
-            <li className="flex justify-between text-slate-400">
-              <span>Domingo</span>
-              <span className="italic">Fechado</span>
-            </li>
-          </ul>
+          <h3 className="text-sm font-space font-bold tracking-wider text-brand-purple uppercase mb-6">Agende</h3>
+          <div className="space-y-3">
+            <a
+              href={whatsappLink()}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center justify-center gap-2 bg-white text-brand-blue hover:bg-slate-100 py-3 rounded-full text-sm font-bold transition-colors"
+            >
+              <MessageCircle className="w-4 h-4" />
+              WhatsApp
+            </a>
+            <a
+              href={site.agendamentoOnlineUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center justify-center gap-2 border border-white/20 text-white hover:bg-white/10 py-3 rounded-full text-sm font-bold transition-colors"
+            >
+              <CalendarCheck className="w-4 h-4" />
+              Agendamento online
+            </a>
+          </div>
         </div>
       </div>
 

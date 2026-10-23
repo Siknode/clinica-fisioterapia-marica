@@ -1,53 +1,54 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { ShieldAlert, Activity, Heart, Dumbbell, Star, Baby, Sparkles, Smile } from 'lucide-react';
+import { ShieldAlert, Activity, Heart, Dumbbell, Brain, Baby, Sparkles, Smile, Footprints } from 'lucide-react';
 
+// Situações citadas nos posts do Instagram da clínica
 const CONDICOES = [
   {
-    title: 'Dor Lombar',
-    description: 'Tratamento de lombalgias agudas e crônicas com foco no fortalecimento de core e reeducação mecânica.',
+    title: 'Dores na coluna',
+    description: 'Dores e tensões nas costas e no pescoço que atrapalham a rotina e o sono.',
     icon: ShieldAlert,
   },
   {
-    title: 'Dor Cervical',
-    description: 'Alívio de tensões no pescoço, torcicolos e cefaleias tencionais através de terapia manual e ergonomia.',
-    icon: Sparkles,
+    title: 'Dores no joelho',
+    description: 'Avaliação e fortalecimento da musculatura que dá suporte ao joelho, com orientação profissional.',
+    icon: Footprints,
   },
   {
-    title: 'Hérnia de Disco',
-    description: 'Tratamento conservador de ponta para descompressão discal e controle da dor sem necessidade de cirurgia.',
+    title: 'Recuperação de movimentos',
+    description: 'Reabilitação para voltar a caminhar sem dor e reconquistar independência e mobilidade.',
     icon: Activity,
   },
   {
-    title: 'Artrose e Desgastes',
-    description: 'Preservação da mobilidade articular e fortalecimento periarticular para controle do desgaste natural.',
+    title: 'Postura e mobilidade',
+    description: 'Pilates e alongamento para melhorar postura, flexibilidade, equilíbrio e consciência corporal.',
+    icon: Sparkles,
+  },
+  {
+    title: 'Estresse e tensão muscular',
+    description: 'Massoterapia para desacelerar, aliviar tensões e favorecer a qualidade do sono.',
     icon: Heart,
   },
   {
-    title: 'Pós-Operatório',
-    description: 'Reabilitação acelerada pós-cirurgia de joelho, quadril, ombro e coluna, visando a completa cicatrização e força.',
-    icon: Dumbbell,
+    title: 'Saúde emocional',
+    description: 'Atendimento psicológico com acolhimento para você e orientação para a família.',
+    icon: Brain,
   },
   {
-    title: 'Atletas',
-    description: 'Prevenção de lesões desportivas, melhora do gesto esportivo e recuperação muscular acelerada (recovery).',
-    icon: Star,
-  },
-  {
-    title: 'Idosos (Longevidade)',
-    description: 'Exercícios focados em equilíbrio, força funcional e autonomia nas atividades diárias do dia a dia.',
+    title: 'TDAH e aprendizagem',
+    description: 'Psicopedagogia e reforço escolar com acompanhamento individualizado para crianças.',
     icon: Smile,
   },
   {
-    title: 'Gestantes (Pré e Pós-parto)',
-    description: 'Fortalecimento do assoalho pélvico, alívio de dores nas costas e preparação física para o parto.',
-    icon: Heart,
+    title: 'Desenvolvimento infantil',
+    description: 'Jiu-jitsu baby e kids para coordenação motora, disciplina, confiança e socialização.',
+    icon: Baby,
   },
   {
-    title: 'Crianças e Adolescentes',
-    description: 'Avaliação e correção postural do crescimento, tratamento de desvios da coluna (escoliose) e lesões infantis.',
-    icon: Baby,
+    title: 'Mais qualidade de vida',
+    description: 'Força, alimentação equilibrada e movimento com acompanhamento, em todas as idades.',
+    icon: Dumbbell,
   },
 ];
 
@@ -73,7 +74,7 @@ export default function ParaQuemE() {
             transition={{ duration: 0.5, delay: 0.1 }}
             className="text-3xl md:text-4xl font-space font-bold text-brand-blue tracking-tight"
           >
-            Soluções completas para todas as idades e sintomas
+            Cuidado para cada fase da vida
           </motion.h2>
           <motion.p
             initial={{ opacity: 0, y: 15 }}
@@ -82,7 +83,7 @@ export default function ParaQuemE() {
             transition={{ duration: 0.5, delay: 0.2 }}
             className="text-sm md:text-base text-brand-muted max-w-2xl mx-auto leading-relaxed"
           >
-            Seja para aliviar uma dor crônica, se recuperar de uma lesão ou melhorar sua postura e bem-estar, nossa clínica possui especialistas prontos para ajudar você.
+            Seja para aliviar uma dor, recuperar movimentos, cuidar da mente ou acompanhar o desenvolvimento dos pequenos, tem atendimento para você e sua família.
           </motion.p>
         </div>
 

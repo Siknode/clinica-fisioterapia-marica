@@ -1,63 +1,50 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import Image from 'next/image';
 import { motion, AnimatePresence } from 'framer-motion';
-import { X, GraduationCap, CheckCircle, ArrowRight } from 'lucide-react';
+import { X, ClipboardList, CheckCircle, ArrowRight, UserRound } from 'lucide-react';
+import ExemploBadge from '@/components/ExemploBadge';
+import { site, whatsappLink } from '@/lib/site';
 
+// Seção de possibilidade: a Dra. Fernanda Coutinho aparece no logo da clínica; os demais cards
+// mostram as áreas atendidas e são substituídos pela foto e apresentação real de cada profissional.
 const EQUIPE = [
   {
-    name: 'Dr. Thiago Silva',
-    role: 'Fisioterapia Traumato-Ortopédica',
-    image: 'https://images.unsplash.com/photo-1622253692010-333f2da6031d?q=80&w=400&auto=format&fit=crop',
-    shortDesc: 'Especialista em reabilitação ortopédica ativa e desportiva com foco em técnicas baseadas em evidências.',
-    education: [
-      'Graduação em Fisioterapia - UFRJ',
-      'Pós-Graduação em Fisioterapia Traumato-Ortopédica - USP',
-      'Certificação Internacional em Quiropraxia Clínica',
-      'Fisioterapeuta Convidado em Eventos de Trail Run em Maricá'
+    name: site.responsavel,
+    role: 'Espaço Reabilitar',
+    initials: 'FC',
+    shortDesc: 'À frente do Espaço Reabilitar, com uma equipe dedicada à saúde completa de toda a família.',
+    items: [
+      'Aqui entra a formação e as especializações da Dra. Fernanda',
+      'Tempo de experiência e áreas de atuação',
+      'Uma mensagem pessoal para os pacientes',
     ],
-    whatsappMsg: 'Olá! Gostaria de agendar uma consulta com o Dr. Thiago Silva.'
+    whatsappMsg: `Olá! Gostaria de agendar um atendimento com a ${site.responsavel}.`,
   },
   {
-    name: 'Dra. Mariana Costa',
-    role: 'Pilates Clínico & RPG',
-    image: 'https://images.unsplash.com/photo-1594824813573-246434de83fb?q=80&w=400&auto=format&fit=crop',
-    shortDesc: 'Especialista em correção postural, reabilitação da coluna e instrutora de Pilates com 8 anos de experiência.',
-    education: [
-      'Graduação em Fisioterapia - UFF',
-      'Pós-Graduação em RPG (Reeducação Postural Global) - Instituto Philippe Souchard',
-      'Certificação Completa em Pilates Clínico (Mat e Aparelhos)',
-      'Especialista em Tratamento de Hérnias de Disco'
-    ],
-    whatsappMsg: 'Olá! Gostaria de agendar uma consulta com a Dra. Mariana Costa.'
+    name: 'Fisioterapia e Pilates',
+    role: 'Fisioterapeutas',
+    initials: '',
+    shortDesc: 'Profissionais que acompanham cada aluno no Pilates e conduzem a reabilitação.',
+    items: ['Pilates com acompanhamento individual', 'Fisioterapia e reabilitação', 'Foto e apresentação de cada fisioterapeuta'],
+    whatsappMsg: 'Olá! Gostaria de agendar Pilates ou fisioterapia no Espaço Reabilitar.',
   },
   {
-    name: 'Dra. Camila Albuquerque',
-    role: 'Fonoaudiologia e Fala',
-    image: 'https://images.unsplash.com/photo-1559839734-2b71ea197ec2?q=80&w=400&auto=format&fit=crop',
-    shortDesc: 'Dedicada à terapia de linguagem, fonologia e motricidade orofacial para crianças e adultos.',
-    education: [
-      'Graduação em Fonoaudiologia - UNIRIO',
-      'Especialização em Linguagem e Processamento Auditivo Central',
-      'Aprimoramento em Disfagia e Voz pelo INCA',
-      'Atendimento humanizado infantil e geriátrico'
-    ],
-    whatsappMsg: 'Olá! Gostaria de agendar uma consulta com a Dra. Camila Albuquerque.'
+    name: 'Psicologia e Psicopedagogia',
+    role: 'Saúde emocional e aprendizagem',
+    initials: '',
+    shortDesc: 'Acolhimento, escuta e acompanhamento individualizado, com orientação à família.',
+    items: ['Atendimento psicológico', 'Psicopedagogia e reforço escolar', 'Foto e apresentação de cada profissional'],
+    whatsappMsg: 'Olá! Gostaria de saber sobre psicologia e psicopedagogia no Espaço Reabilitar.',
   },
   {
-    name: 'Dr. Felipe Dantas',
-    role: 'Nutrição Clínica & Esportiva',
-    image: 'https://images.unsplash.com/photo-1537368910025-700350fe46c7?q=80&w=400&auto=format&fit=crop',
-    shortDesc: 'Focado em performance saudável, reabilitação metabólica e nutrição comportamental integrativa.',
-    education: [
-      'Graduação em Nutrição - UERJ',
-      'Pós-Graduação em Nutrição Esportiva Funcional',
-      'Mestrado em Ciências da Reabilitação e Metabolismo',
-      'Criador do Protocolo Nutricional de Longevidade Ativa'
-    ],
-    whatsappMsg: 'Olá! Gostaria de agendar uma consulta com o Dr. Felipe Dantas.'
-  }
+    name: 'Nutrição e Massoterapia',
+    role: 'Bem-estar',
+    initials: '',
+    shortDesc: 'Orientação alimentar e momentos de relaxamento para cuidar de você por inteiro.',
+    items: ['Consulta nutricional', 'Massoterapia e massagem relaxante', 'Foto e apresentação de cada profissional'],
+    whatsappMsg: 'Olá! Gostaria de saber sobre nutrição e massoterapia no Espaço Reabilitar.',
+  },
 ];
 
 export default function Equipe() {
@@ -75,15 +62,10 @@ export default function Equipe() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
         {/* Header Section */}
         <div className="text-center max-w-3xl mx-auto space-y-4 mb-10 md:mb-16">
-          <motion.span
-            initial={{ opacity: 0, y: 10 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
-            className="text-xs font-bold tracking-widest text-brand-purple uppercase"
-          >
-            Corpo Clínico
-          </motion.span>
+          <div className="flex flex-col items-center gap-3">
+            <ExemploBadge>Exemplo: fotos e apresentações da equipe</ExemploBadge>
+            <span className="text-xs font-bold tracking-widest text-brand-purple uppercase">Nossa equipe</span>
+          </div>
           <motion.h2
             initial={{ opacity: 0, y: 15 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -91,7 +73,7 @@ export default function Equipe() {
             transition={{ duration: 0.5, delay: 0.1 }}
             className="text-3xl md:text-4xl font-space font-bold text-brand-blue tracking-tight"
           >
-            Especialistas dedicados à sua recuperação
+            Quem cuida de você
           </motion.h2>
           <motion.p
             initial={{ opacity: 0, y: 15 }}
@@ -100,7 +82,7 @@ export default function Equipe() {
             transition={{ duration: 0.5, delay: 0.2 }}
             className="text-sm md:text-base text-brand-muted max-w-2xl mx-auto leading-relaxed"
           >
-            Nossa equipe conta com profissionais altamente qualificados, pós-graduados e em constante atualização científica para entregar o melhor tratamento.
+            Uma equipe multidisciplinar para cuidar do corpo e da mente, em cada fase da vida.
           </motion.p>
         </div>
 
@@ -121,14 +103,12 @@ export default function Equipe() {
             >
               <div className="space-y-6">
                 {/* Round Photo Container */}
-                <div className="relative w-28 h-28 mx-auto rounded-full overflow-hidden border-4 border-white shadow-md group-hover:scale-105 transition-transform duration-300">
-                  <Image
-                    src={membro.image}
-                    alt={membro.name}
-                    fill
-                    sizes="112px"
-                    className="object-cover"
-                  />
+                <div className="relative w-28 h-28 mx-auto rounded-full overflow-hidden border-4 border-white shadow-md group-hover:scale-105 transition-transform duration-300 bg-gradient-to-br from-brand-blue to-brand-purple flex items-center justify-center text-white">
+                  {membro.initials ? (
+                    <span className="font-space font-bold text-3xl">{membro.initials}</span>
+                  ) : (
+                    <UserRound className="w-12 h-12 text-white/70" />
+                  )}
                 </div>
 
                 {/* Info Text */}
@@ -191,14 +171,12 @@ export default function Equipe() {
 
               {/* Bio Header */}
               <div className="flex items-center gap-4 sm:gap-5 pr-8">
-                <div className="relative w-16 h-16 sm:w-20 sm:h-20 rounded-full overflow-hidden border-2 border-slate-100 shrink-0">
-                  <Image
-                    src={selectedMembro.image}
-                    alt={selectedMembro.name}
-                    fill
-                    sizes="80px"
-                    className="object-cover"
-                  />
+                <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-full border-2 border-slate-100 shrink-0 bg-gradient-to-br from-brand-blue to-brand-purple flex items-center justify-center text-white">
+                  {selectedMembro.initials ? (
+                    <span className="font-space font-bold text-2xl">{selectedMembro.initials}</span>
+                  ) : (
+                    <UserRound className="w-8 h-8 text-white/70" />
+                  )}
                 </div>
                 <div>
                   <h3 className="font-space font-bold text-lg sm:text-xl text-brand-blue">{selectedMembro.name}</h3>
@@ -216,11 +194,11 @@ export default function Equipe() {
                 <hr className="border-slate-100" />
                 <div className="space-y-3">
                   <h4 className="font-space font-bold text-sm text-brand-blue flex items-center gap-1.5">
-                    <GraduationCap className="w-4 h-4 text-brand-purple" />
-                    Formação e Especializações
+                    <ClipboardList className="w-4 h-4 text-brand-purple" />
+                    O que vai aparecer aqui
                   </h4>
                   <ul className="space-y-2 text-xs text-brand-muted">
-                    {selectedMembro.education.map((edu, idx) => (
+                    {selectedMembro.items.map((edu, idx) => (
                       <li key={idx} className="flex items-start gap-2">
                         <CheckCircle className="w-3.5 h-3.5 text-brand-purple shrink-0 mt-0.5" />
                         <span>{edu}</span>
@@ -233,12 +211,12 @@ export default function Equipe() {
               {/* Whatsapp CTA */}
               <div className="pt-2">
                 <a
-                  href={`https://wa.me/5521968993480?text=${encodeURIComponent(selectedMembro.whatsappMsg)}`}
+                  href={whatsappLink(selectedMembro.whatsappMsg)}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="w-full flex items-center justify-center gap-2 bg-brand-purple hover:bg-brand-purple-dark text-white py-3.5 rounded-full text-xs font-bold transition-all shadow-md shadow-brand-purple/10"
                 >
-                  <span>Agendar Consulta com Especialista</span>
+                  <span>Agendar pelo WhatsApp</span>
                 </a>
               </div>
             </motion.div>

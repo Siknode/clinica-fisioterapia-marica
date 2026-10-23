@@ -1,4 +1,5 @@
-import { MessageSquare, Phone, MapPin, ExternalLink } from 'lucide-react';
+import { MessageSquare, Phone, MapPin, ExternalLink, CalendarCheck, Instagram } from 'lucide-react';
+import { site, whatsappLink } from '@/lib/site';
 
 export default function Mapa() {
   const mapEmbedUrl = "https://maps.google.com/maps?q=Av.+Maysa,+entre+a+rua+87+e+88+-+Cordeirinho,+Maric%C3%A1+-+RJ,+24921-456&t=&z=15&ie=UTF8&iwloc=&output=embed";
@@ -17,7 +18,7 @@ export default function Mapa() {
                   Venha conhecer o nosso espaço
                 </h2>
                 <p className="text-xs md:text-sm text-brand-muted leading-relaxed">
-                  Estamos localizados em Cordeirinho, Maricá, com estacionamento privativo e total facilidade de acesso.
+                  Estamos em Cordeirinho, Maricá, junto com o CTS Cordeirinho. Agende pelo WhatsApp ou online.
                 </p>
               </div>
 
@@ -45,9 +46,9 @@ export default function Mapa() {
                     <MessageSquare className="w-5 h-5" />
                   </div>
                   <div>
-                    <h4 className="text-xs font-bold uppercase tracking-wider text-brand-blue">WhatsApp (Triagem rápida)</h4>
+                    <h4 className="text-xs font-bold uppercase tracking-wider text-brand-blue">WhatsApp</h4>
                     <a
-                      href="https://wa.me/5521968993480?text=Olá!%20Gostaria%20de%20agendar%20uma%20consulta."
+                      href={whatsappLink()}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="text-xs md:text-sm text-brand-purple font-bold hover:underline block mt-1"
@@ -63,12 +64,36 @@ export default function Mapa() {
                     <Phone className="w-5 h-5" />
                   </div>
                   <div>
-                    <h4 className="text-xs font-bold uppercase tracking-wider text-brand-blue">Telefone / Ligações</h4>
+                    <h4 className="text-xs font-bold uppercase tracking-wider text-brand-blue">Telefones</h4>
                     <a
-                      href="tel:+5521968993480"
+                      href={`tel:+${site.phoneE164}`}
                       className="text-xs md:text-sm text-brand-blue font-bold hover:underline block mt-1"
                     >
-                      (21) 96899-3480
+                      {site.phoneDisplay}
+                    </a>
+                    <a
+                      href={`tel:+${site.phone2E164}`}
+                      className="text-xs md:text-sm text-brand-blue font-bold hover:underline block mt-0.5"
+                    >
+                      {site.phone2Display}
+                    </a>
+                  </div>
+                </div>
+
+                {/* Instagram */}
+                <div className="flex items-start gap-4">
+                  <div className="w-10 h-10 rounded-xl bg-brand-purple/5 border border-brand-purple/10 flex items-center justify-center text-brand-purple shrink-0">
+                    <Instagram className="w-5 h-5" />
+                  </div>
+                  <div>
+                    <h4 className="text-xs font-bold uppercase tracking-wider text-brand-blue">Instagram</h4>
+                    <a
+                      href={site.instagramUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-xs md:text-sm text-brand-purple font-bold hover:underline block mt-1"
+                    >
+                      @{site.instagram}
                     </a>
                   </div>
                 </div>
@@ -76,14 +101,24 @@ export default function Mapa() {
             </div>
 
             {/* CTA buttons */}
-            <div className="pt-6">
+            <div className="pt-6 flex flex-col gap-3">
               <a
-                href="https://wa.me/5521968993480?text=Olá!%20Gostaria%20de%20agendar%20uma%20avaliação."
+                href={whatsappLink()}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-full flex items-center justify-center gap-2 bg-brand-purple hover:bg-brand-purple-dark text-white py-4 rounded-full text-xs font-bold transition-all shadow-md shadow-brand-purple/10"
               >
-                <span>Falar com Atendimento no WhatsApp</span>
+                <MessageSquare className="w-4 h-4" />
+                <span>Agendar pelo WhatsApp</span>
+              </a>
+              <a
+                href={site.agendamentoOnlineUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-full flex items-center justify-center gap-2 bg-white hover:bg-slate-50 border border-slate-200 text-brand-blue py-4 rounded-full text-xs font-bold transition-all"
+              >
+                <CalendarCheck className="w-4 h-4" />
+                <span>Agendamento online</span>
               </a>
             </div>
           </div>
@@ -110,7 +145,7 @@ export default function Mapa() {
                 <ExternalLink className="w-3 h-3 text-brand-purple" />
               </div>
               <p className="hidden sm:block text-[10px] text-brand-muted mt-1 leading-snug">
-                Estacionamento fácil e atendimento em ambiente confortável planejado para você.
+                Av. Maysa, entre a rua 87 e 88 – Cordeirinho, Maricá.
               </p>
             </a>
           </div>

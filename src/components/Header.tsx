@@ -7,14 +7,14 @@ import { motion, AnimatePresence } from 'framer-motion';
 
 const NAV_ITEMS = [
   { label: 'Diferenciais', href: '#diferenciais' },
-  { label: 'Especialidades', href: '#especialidades' },
+  { label: 'Serviços', href: '#especialidades' },
   { label: 'Para Quem', href: '#para-quem' },
-  { label: 'Estrutura', href: '#estrutura' },
+  { label: 'Espaço', href: '#estrutura' },
   { label: 'Equipe', href: '#equipe' },
-  { label: 'Resultados', href: '#resultados' },
-  { label: 'IA Triagem', href: '#triagem-ia' },
-  { label: 'Conhecimento', href: '#blog' },
-  { label: 'FAQ', href: '#faq' },
+  { label: 'Depoimentos', href: '#resultados' },
+  { label: 'Dicas', href: '#blog' },
+  { label: 'Dúvidas', href: '#faq' },
+  { label: 'Contato', href: '#contato' },
 ];
 
 export default function Header() {
