@@ -1,7 +1,8 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Inter, Manrope, Space_Grotesk } from "next/font/google";
 import "./globals.css";
 import LenisProvider from "@/components/LenisProvider";
+import WhatsAppFlutuante from "@/components/WhatsAppFlutuante";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -20,6 +21,12 @@ const spaceGrotesk = Space_Grotesk({
   subsets: ["latin"],
   display: "swap",
 });
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  themeColor: "#16308f",
+};
 
 const siteUrl = "https://clinica-fisioterapia-marica.vercel.app";
 
@@ -123,6 +130,7 @@ export default function RootLayout({
         <LenisProvider>
           {children}
         </LenisProvider>
+        <WhatsAppFlutuante />
       </body>
     </html>
   );

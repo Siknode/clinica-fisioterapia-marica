@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import Image from 'next/image';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Star, MessageSquare, ChevronLeft, ChevronRight, Check } from 'lucide-react';
 
@@ -43,12 +44,12 @@ export default function Resultados() {
   };
 
   return (
-    <section id="resultados" className="py-24 bg-brand-light relative overflow-hidden">
+    <section id="resultados" className="py-16 md:py-24 bg-brand-light relative overflow-hidden">
       {/* Background blurs */}
       <div className="absolute top-1/3 left-0 w-72 h-72 rounded-full bg-brand-green/5 blur-3xl" />
       <div className="absolute bottom-1/3 right-0 w-72 h-72 rounded-full bg-brand-blue/5 blur-3xl" />
 
-      <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center">
         {/* Left Column: Google Reviews summary */}
         <div className="lg:col-span-5 space-y-6 text-center lg:text-left">
           <span className="text-xs font-bold tracking-widest text-brand-green uppercase">Resultados Reais</span>
@@ -60,7 +61,7 @@ export default function Resultados() {
           </p>
 
           {/* Google Review Card */}
-          <div className="p-6 rounded-3xl bg-white border border-slate-100 shadow-md inline-block max-w-sm w-full">
+          <div className="p-5 sm:p-6 rounded-3xl bg-white border border-slate-100 shadow-md inline-block max-w-sm w-full text-left">
             <div className="flex items-center justify-between border-b border-slate-100 pb-4">
               <div className="flex items-center gap-2">
                 <span className="text-lg font-space font-bold text-brand-blue">Google</span>
@@ -91,7 +92,7 @@ export default function Resultados() {
 
         {/* Right Column: Sliding Testimonials */}
         <div className="lg:col-span-7 relative w-full flex flex-col items-center">
-          <div className="relative w-full max-w-xl aspect-[16/10] sm:aspect-[16/9] flex items-center justify-center">
+          <div className="relative w-full max-w-xl min-h-[340px] sm:min-h-[300px] flex items-center justify-center">
             <AnimatePresence mode="wait">
               <motion.div
                 key={activeIdx}
@@ -99,7 +100,14 @@ export default function Resultados() {
                 animate={{ opacity: 1, x: 0 }}
                 exit={{ opacity: 0, x: -50 }}
                 transition={{ duration: 0.4 }}
-                className="w-full bg-white p-8 md:p-10 rounded-[2rem] border border-slate-100 shadow-xl flex flex-col justify-between space-y-6"
+                drag="x"
+                dragConstraints={{ left: 0, right: 0 }}
+                dragElastic={0.3}
+                onDragEnd={(_, info) => {
+                  if (info.offset.x < -60) handleNext();
+                  else if (info.offset.x > 60) handlePrev();
+                }}
+                className="touch-pan-y cursor-grab active:cursor-grabbing w-full bg-white p-6 sm:p-8 md:p-10 rounded-3xl md:rounded-[2rem] border border-slate-100 shadow-xl flex flex-col justify-between space-y-6"
               >
                 {/* Quote details */}
                 <div className="space-y-4">
@@ -111,19 +119,20 @@ export default function Resultados() {
                     </div>
                     <MessageSquare className="w-8 h-8 text-brand-green/20" />
                   </div>
-                  <p className="text-xs md:text-sm text-slate-600 leading-relaxed font-sans italic">
+                  <p className="text-sm text-slate-600 leading-relaxed font-sans italic">
                     &ldquo;{TESTIMONIALS[activeIdx].text}&rdquo;
                   </p>
                 </div>
 
                 {/* Patient Profile */}
                 <div className="flex items-center gap-4 pt-4 border-t border-slate-100">
-                  <div className="w-12 h-12 rounded-full overflow-hidden shrink-0 border border-slate-200">
-                    {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img
+                  <div className="relative w-12 h-12 rounded-full overflow-hidden shrink-0 border border-slate-200">
+                    <Image
                       src={TESTIMONIALS[activeIdx].avatar}
                       alt={TESTIMONIALS[activeIdx].name}
-                      className="w-full h-full object-cover"
+                      fill
+                      sizes="48px"
+                      className="object-cover"
                     />
                   </div>
                   <div>
@@ -146,16 +155,20 @@ export default function Resultados() {
             >
               <ChevronLeft className="w-5 h-5" />
             </button>
-            <div className="flex gap-2">
+            <div className="flex">
               {TESTIMONIALS.map((_, i) => (
                 <button
                   key={i}
                   onClick={() => setActiveIdx(i)}
-                  className={`w-2 h-2 rounded-full transition-all duration-300 ${
-                    i === activeIdx ? 'w-6 bg-brand-green' : 'bg-slate-300'
-                  }`}
+                  className="p-1.5 cursor-pointer"
                   aria-label={`Ir para slide ${i + 1}`}
-                />
+                >
+                  <span
+                    className={`block h-2 rounded-full transition-all duration-300 ${
+                      i === activeIdx ? 'w-6 bg-brand-green' : 'w-2 bg-slate-300'
+                    }`}
+                  />
+                </button>
               ))}
             </div>
             <button

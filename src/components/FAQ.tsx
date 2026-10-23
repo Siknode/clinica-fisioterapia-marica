@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ChevronDown, HelpCircle } from 'lucide-react';
+import { ChevronDown } from 'lucide-react';
 
 const FAQS = [
   {
@@ -35,10 +35,10 @@ export default function FAQ() {
   };
 
   return (
-    <section id="faq" className="py-24 bg-white relative overflow-hidden">
-      <div className="max-w-4xl mx-auto px-6">
+    <section id="faq" className="py-16 md:py-24 bg-white relative overflow-hidden">
+      <div className="max-w-4xl mx-auto px-4 sm:px-6">
         {/* Header Section */}
-        <div className="text-center space-y-4 mb-16">
+        <div className="text-center space-y-4 mb-10 md:mb-16">
           <span className="text-xs font-bold tracking-widest text-brand-green uppercase">Dúvidas Frequentes</span>
           <h2 className="text-3xl md:text-4xl font-space font-bold text-brand-blue tracking-tight">
             Perguntas mais comuns sobre nossa clínica
@@ -49,7 +49,7 @@ export default function FAQ() {
         </div>
 
         {/* Accordions List */}
-        <div className="space-y-4">
+        <div className="space-y-3 md:space-y-4">
           {FAQS.map((faq, idx) => {
             const isOpen = openIdx === idx;
             return (
@@ -60,10 +60,11 @@ export default function FAQ() {
                 {/* Accordion trigger button */}
                 <button
                   onClick={() => toggleFAQ(idx)}
-                  className="w-full flex items-center justify-between p-6 text-left font-space font-bold text-sm md:text-base text-brand-blue focus:outline-none cursor-pointer"
+                  aria-expanded={isOpen}
+                  className="w-full flex items-center justify-between gap-3 p-5 md:p-6 text-left font-space font-bold text-sm md:text-base text-brand-blue focus:outline-none cursor-pointer"
                 >
-                  <span className="pr-4">{faq.question}</span>
-                  <div className={`p-1.5 rounded-xl bg-white border border-slate-200/50 text-brand-blue transition-transform duration-300 ${
+                  <span>{faq.question}</span>
+                  <div className={`shrink-0 p-1.5 rounded-xl bg-white border border-slate-200/50 text-brand-blue transition-transform duration-300 ${
                     isOpen ? 'rotate-180 bg-brand-green text-white border-transparent' : ''
                   }`}>
                     <ChevronDown className="w-4 h-4" />
@@ -79,7 +80,7 @@ export default function FAQ() {
                       exit={{ height: 0, opacity: 0 }}
                       transition={{ duration: 0.3, ease: 'easeInOut' }}
                     >
-                      <div className="px-6 pb-6 text-xs md:text-sm text-brand-muted leading-relaxed font-sans border-t border-slate-100/50 pt-4">
+                      <div className="px-5 md:px-6 pb-5 md:pb-6 text-sm text-brand-muted leading-relaxed font-sans border-t border-slate-100/50 pt-4">
                         {faq.answer}
                       </div>
                     </motion.div>

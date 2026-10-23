@@ -1,5 +1,6 @@
 'use client';
 
+import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { Activity, Dumbbell, Apple, MessageSquare, Heart, ShieldCheck, ArrowRight } from 'lucide-react';
 
@@ -64,10 +65,10 @@ const ESPECIALIDADES = [
 
 export default function Especialidades() {
   return (
-    <section id="especialidades" className="py-24 bg-brand-light relative">
-      <div className="max-w-7xl mx-auto px-6">
+    <section id="especialidades" className="py-16 md:py-24 bg-brand-light relative">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6">
         {/* Header Section */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-16">
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10 md:mb-16">
           <div className="space-y-4 max-w-2xl">
             <span className="text-xs font-bold tracking-widest text-brand-purple uppercase">Nossos Serviços</span>
             <h2 className="text-3xl md:text-4xl font-space font-bold text-brand-blue tracking-tight">
@@ -81,15 +82,18 @@ export default function Especialidades() {
             href="https://wa.me/5521968993480?text=Olá!%20Gostaria%20de%20tirar%20dúvidas%20sobre%20as%20especialidades."
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 bg-white hover:bg-slate-50 border border-slate-200 text-brand-blue font-bold px-6 py-3 rounded-full text-xs transition-all duration-300 shadow-sm"
+            className="self-start md:self-auto shrink-0 inline-flex items-center gap-2 bg-white hover:bg-slate-50 border border-slate-200 text-brand-blue font-bold px-6 py-3 rounded-full text-xs transition-all duration-300 shadow-sm"
           >
             <span>Dúvidas sobre tratamentos?</span>
             <ArrowRight className="w-3.5 h-3.5" />
           </a>
         </div>
 
-        {/* Grid Container */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <p className="md:hidden -mt-4 mb-4 text-[11px] font-semibold text-brand-muted flex items-center gap-1.5">
+          Arraste para o lado para ver mais <ArrowRight className="w-3.5 h-3.5" />
+        </p>
+        {/* Carrossel no mobile, grade a partir do tablet */}
+        <div className="flex md:grid md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-8 overflow-x-auto md:overflow-visible snap-x snap-mandatory scroll-px-4 sm:scroll-px-6 -mx-4 px-4 sm:-mx-6 sm:px-6 md:mx-0 md:px-0 pb-4 md:pb-0 scrollbar-none">
           {ESPECIALIDADES.map((item, index) => {
             const Icon = item.icon;
             return (
@@ -99,16 +103,16 @@ export default function Especialidades() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: '-50px' }}
                 transition={{ duration: 0.6, delay: index * 0.05 }}
-                className="bg-white rounded-[2rem] overflow-hidden border border-slate-100 hover:border-brand-purple/20 shadow-md shadow-slate-100/50 hover:shadow-xl hover:shadow-brand-purple/5 transition-all duration-500 flex flex-col justify-between group"
+                className="w-[82%] sm:w-[60%] md:w-auto shrink-0 snap-start bg-white rounded-[2rem] overflow-hidden border border-slate-100 hover:border-brand-purple/20 shadow-md shadow-slate-100/50 hover:shadow-xl hover:shadow-brand-purple/5 transition-all duration-500 flex flex-col justify-between group"
               >
                 {/* Image Section */}
                 <div className="relative aspect-[16/10] w-full overflow-hidden">
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img
+                  <Image
                     src={item.image}
                     alt={item.title}
-                    className="w-full h-full object-cover transition-transform duration-750 group-hover:scale-105"
-                    loading="lazy"
+                    fill
+                    sizes="(min-width: 1024px) 400px, (min-width: 768px) 50vw, 82vw"
+                    className="object-cover transition-transform duration-750 group-hover:scale-105"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-white via-transparent to-transparent opacity-80" />
 
@@ -119,7 +123,7 @@ export default function Especialidades() {
                 </div>
 
                 {/* Content Section */}
-                <div className="p-6 md:p-8 flex-1 flex flex-col justify-between space-y-6">
+                <div className="p-5 md:p-8 flex-1 flex flex-col justify-between space-y-5 md:space-y-6">
                   <div className="space-y-3">
                     <h3 className="font-space font-bold text-lg text-brand-blue group-hover:text-brand-purple transition-colors duration-300">
                       {item.title}

@@ -1,6 +1,7 @@
 'use client';
 
-import { Activity, Instagram, Mail, MapPin, Phone, MessageCircle } from 'lucide-react';
+import Image from 'next/image';
+import { Instagram, Mail, MapPin, Phone, MessageCircle } from 'lucide-react';
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
@@ -8,7 +9,7 @@ export default function Footer() {
   return (
     <footer className="bg-brand-blue text-slate-100 border-t border-brand-blue-dark/50">
       {/* Top section */}
-      <div className="max-w-7xl mx-auto px-6 py-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 py-12 md:py-16 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 md:gap-12">
         {/* Brand Column */}
         <div className="space-y-6">
           <a
@@ -19,29 +20,14 @@ export default function Footer() {
             }}
             className="flex items-center gap-3 group font-space"
           >
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
+            <Image
               src="/images/logo.png"
               alt="Espaço Reabilitar"
-              className="h-[120px] w-auto object-contain transition-transform duration-300 group-hover:scale-102"
-              onError={(e) => {
-                e.currentTarget.style.display = 'none';
-                const textFallback = document.getElementById('footer-logo-text-fallback');
-                if (textFallback) {
-                  textFallback.classList.remove('hidden');
-                  textFallback.classList.add('flex');
-                }
-              }}
+              width={240}
+              height={240}
+              sizes="112px"
+              className="h-24 md:h-28 w-auto object-contain transition-transform duration-300 group-hover:scale-102"
             />
-            <div id="footer-logo-text-fallback" className="hidden items-center gap-2">
-              <div className="w-10 h-10 rounded-xl bg-white/10 flex items-center justify-center text-brand-purple group-hover:scale-110 transition-transform duration-300">
-                <Activity className="w-5 h-5 text-brand-purple" />
-              </div>
-              <span className="flex flex-col leading-none">
-                <span className="font-space font-bold tracking-wide text-white text-lg">REABILITAR</span>
-                <span className="text-[9px] tracking-[0.2em] font-sans font-bold text-brand-purple mt-0.5">ESPAÇO</span>
-              </span>
-            </div>
           </a>
           <p className="text-sm text-slate-300 leading-relaxed max-w-sm">
             Especialistas em redefinir a sua saúde física por meio de fisioterapia avançada, pilates clínico e reabilitação personalizada.
@@ -108,9 +94,9 @@ export default function Footer() {
                 (21) 96899-3480
               </a>
             </li>
-            <li className="flex items-center gap-3">
-              <Mail className="w-4 h-4 text-brand-purple shrink-0" />
-              <a href="mailto:contato@espacoreabilitarmarica.com.br" className="text-slate-300 hover:text-white transition-colors">
+            <li className="flex items-start gap-3">
+              <Mail className="w-4 h-4 text-brand-purple shrink-0 mt-0.5" />
+              <a href="mailto:contato@espacoreabilitarmarica.com.br" className="text-slate-300 hover:text-white transition-colors break-all">
                 contato@espacoreabilitarmarica.com.br
               </a>
             </li>
@@ -138,8 +124,8 @@ export default function Footer() {
       </div>
 
       {/* Bottom section */}
-      <div className="border-t border-white/5 bg-brand-blue-dark/30 py-8">
-        <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-slate-400">
+      <div className="border-t border-white/5 bg-brand-blue-dark/30 pt-8 pb-24 md:pb-8">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 flex flex-col md:flex-row items-center justify-between gap-3 md:gap-4 text-xs text-slate-400 text-center">
           <div>
             &copy; {currentYear} Espaço Reabilitar. Todos os direitos reservados.
           </div>

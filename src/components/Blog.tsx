@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import Image from 'next/image';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Calendar, Clock, ArrowUpRight } from 'lucide-react';
 
@@ -57,10 +58,10 @@ export default function Blog() {
     : ARTICLES.filter(art => art.category === selectedCat);
 
   return (
-    <section id="blog" className="py-24 bg-brand-light relative">
-      <div className="max-w-7xl mx-auto px-6">
+    <section id="blog" className="py-16 md:py-24 bg-brand-light relative">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6">
         {/* Header Section */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-16">
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-10 md:mb-16">
           <div className="space-y-4 max-w-2xl">
             <span className="text-xs font-bold tracking-widest text-brand-purple uppercase">Centro de Conhecimento</span>
             <h2 className="text-3xl md:text-4xl font-space font-bold text-brand-blue tracking-tight">
@@ -73,14 +74,14 @@ export default function Blog() {
         </div>
 
         {/* Filter categories tabs bar */}
-        <div className="flex flex-wrap items-center gap-2 mb-12 border-b border-slate-200/60 pb-6 overflow-x-auto scrollbar-none">
+        <div className="flex md:flex-wrap items-center gap-2 mb-8 md:mb-12 border-b border-slate-200/60 pb-4 md:pb-6 overflow-x-auto scrollbar-none -mx-4 px-4 sm:-mx-6 sm:px-6 md:mx-0 md:px-0">
           {CATEGORIES.map((cat) => {
             const isSelected = selectedCat === cat;
             return (
               <button
                 key={cat}
                 onClick={() => setSelectedCat(cat)}
-                className={`px-5 py-2.5 rounded-full text-xs font-bold transition-all duration-300 cursor-pointer ${
+                className={`shrink-0 whitespace-nowrap px-5 py-2.5 rounded-full text-xs font-bold transition-all duration-300 cursor-pointer ${
                   isSelected
                     ? 'bg-brand-purple text-white shadow-md shadow-brand-purple/10'
                     : 'bg-white hover:bg-slate-50 text-brand-blue border border-slate-200/50'
@@ -95,10 +96,10 @@ export default function Blog() {
         {/* Articles List / Grid with dynamic transition */}
         <motion.div
           layout
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+          className="flex md:grid md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-8 overflow-x-auto md:overflow-visible snap-x snap-mandatory scroll-px-4 sm:scroll-px-6 -mx-4 px-4 sm:-mx-6 sm:px-6 md:mx-0 md:px-0 pb-4 md:pb-0 scrollbar-none"
         >
           <AnimatePresence mode="popLayout">
-            {filteredArticles.map((article, index) => (
+            {filteredArticles.map((article) => (
               <motion.article
                 layout
                 key={article.title}
@@ -106,16 +107,16 @@ export default function Blog() {
                 animate={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0, scale: 0.95 }}
                 transition={{ duration: 0.4 }}
-                className="bg-white rounded-[2rem] overflow-hidden border border-slate-100 hover:border-brand-purple/20 shadow-md shadow-slate-100/55 hover:shadow-xl hover:shadow-brand-purple/5 transition-all duration-500 flex flex-col justify-between group"
+                className="w-[82%] sm:w-[60%] md:w-auto shrink-0 snap-start bg-white rounded-[2rem] overflow-hidden border border-slate-100 hover:border-brand-purple/20 shadow-md shadow-slate-100/55 hover:shadow-xl hover:shadow-brand-purple/5 transition-all duration-500 flex flex-col justify-between group"
               >
                 {/* Image Section */}
                 <div className="relative aspect-[16/10] w-full overflow-hidden">
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img
+                  <Image
                     src={article.image}
                     alt={article.title}
-                    className="w-full h-full object-cover transition-transform duration-750 group-hover:scale-103"
-                    loading="lazy"
+                    fill
+                    sizes="(min-width: 1024px) 400px, (min-width: 768px) 50vw, 82vw"
+                    className="object-cover transition-transform duration-750 group-hover:scale-103"
                   />
                   <div className="absolute top-4 left-4 px-3.5 py-1.5 rounded-full bg-white/90 backdrop-blur-md text-[10px] font-bold text-brand-blue uppercase tracking-wider border border-slate-100">
                     {article.category}
@@ -123,7 +124,7 @@ export default function Blog() {
                 </div>
 
                 {/* Content Section */}
-                <div className="p-6 md:p-8 flex-1 flex flex-col justify-between space-y-6">
+                <div className="p-5 md:p-8 flex-1 flex flex-col justify-between space-y-5 md:space-y-6">
                   <div className="space-y-3">
                     {/* Date and Time */}
                     <div className="flex items-center gap-4 text-[10px] text-brand-muted font-bold uppercase tracking-wider">

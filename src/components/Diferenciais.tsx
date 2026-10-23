@@ -1,7 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { Users, UserCheck, Layout, Cpu, Heart, ShieldAlert } from 'lucide-react';
+import { Users, UserCheck, Layout, Cpu, Heart } from 'lucide-react';
 
 const DIFERENCIAIS = [
   {
@@ -33,14 +33,14 @@ const DIFERENCIAIS = [
 
 export default function Diferenciais() {
   return (
-    <section id="diferenciais" className="py-24 bg-white relative overflow-hidden">
+    <section id="diferenciais" className="py-16 md:py-24 bg-white relative overflow-hidden">
       {/* Background visual accents */}
       <div className="absolute top-0 right-0 w-80 h-80 rounded-full bg-brand-green-light/20 blur-3xl -z-10" />
       <div className="absolute bottom-0 left-0 w-80 h-80 rounded-full bg-brand-blue-light/10 blur-3xl -z-10" />
 
-      <div className="max-w-7xl mx-auto px-6">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6">
         {/* Header Section */}
-        <div className="text-center max-w-3xl mx-auto space-y-4 mb-16">
+        <div className="text-center max-w-3xl mx-auto space-y-4 mb-10 md:mb-16">
           <motion.span
             initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -71,7 +71,7 @@ export default function Diferenciais() {
         </div>
 
         {/* Cards Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-8">
           {DIFERENCIAIS.map((item, index) => {
             const Icon = item.icon;
             return (
@@ -81,15 +81,15 @@ export default function Diferenciais() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: '-50px' }}
                 transition={{ duration: 0.6, delay: index * 0.1 }}
-                className="glass-card p-8 rounded-3xl flex flex-col justify-between group"
+                className="glass-card p-5 sm:p-8 rounded-3xl group"
               >
-                <div className="space-y-6">
+                <div className="flex items-start gap-4 sm:block sm:space-y-6">
                   {/* Icon Wrapper */}
-                  <div className="w-12 h-12 rounded-2xl bg-brand-green/10 text-brand-green flex items-center justify-center group-hover:bg-brand-green group-hover:text-white transition-all duration-300 shadow-sm shadow-brand-green/5">
+                  <div className="w-12 h-12 shrink-0 rounded-2xl bg-brand-green/10 text-brand-green flex items-center justify-center group-hover:bg-brand-green group-hover:text-white transition-all duration-300 shadow-sm shadow-brand-green/5">
                     <Icon className="w-6 h-6 stroke-[1.8]" />
                   </div>
-                  <div className="space-y-3">
-                    <h3 className="font-space font-bold text-lg text-brand-blue group-hover:text-brand-green transition-colors duration-300">
+                  <div className="space-y-1.5 sm:space-y-3">
+                    <h3 className="font-space font-bold text-base sm:text-lg text-brand-blue group-hover:text-brand-green transition-colors duration-300">
                       {item.title}
                     </h3>
                     <p className="text-xs md:text-sm text-brand-muted leading-relaxed font-sans">

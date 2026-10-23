@@ -9,6 +9,9 @@ interface LenisProviderProps {
 
 export default function LenisProvider({ children }: LenisProviderProps) {
   useEffect(() => {
+    // Respeita quem prefere menos movimento: mantém a rolagem nativa
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
     const lenis = new Lenis({
       duration: 1.2,
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
@@ -36,10 +39,8 @@ export default function LenisProvider({ children }: LenisProviderProps) {
         const targetElement = document.querySelector(anchor.hash);
         if (targetElement) {
           e.preventDefault();
-          lenis.scrollTo(targetElement as HTMLElement, {
-            offset: -80, // compensa o cabeçalho fixo
-            duration: 1.5,
-          });
+          // O Lenis já desconta o scroll-padding-top do <html> (cabeçalho fixo)
+          lenis.scrollTo(targetElement as HTMLElement, { duration: 1.5 });
         }
       }
     };

@@ -6,7 +6,13 @@ const nextConfig: NextConfig = {
     "localhost:3001",
     "*.serveousercontent.com",
     "*.loca.lt"
-  ]
+  ],
+  images: {
+    formats: ["image/avif", "image/webp"],
+    remotePatterns: [
+      { protocol: "https", hostname: "images.unsplash.com" },
+    ],
+  },
 };
 
 export default nextConfig;

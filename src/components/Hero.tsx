@@ -1,5 +1,6 @@
 'use client';
 
+import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { ArrowRight, Play, CheckCircle2, ShieldCheck, Users } from 'lucide-react';
 import { useState, useEffect } from 'react';
@@ -37,33 +38,22 @@ export default function Hero() {
     return () => clearInterval(interval);
   }, []);
 
-  const handleScrollToSpecialties = (e: React.MouseEvent) => {
-    e.preventDefault();
-    const target = document.querySelector('#especialidades');
-    if (target) {
-      window.scrollTo({
-        top: target.getBoundingClientRect().top + window.scrollY - 80,
-        behavior: 'smooth',
-      });
-    }
-  };
-
   return (
-    <section className="relative min-h-screen flex items-center justify-center pt-36 lg:pt-48 pb-16 overflow-hidden bg-gradient-to-br from-brand-light via-white to-brand-blue-light/20">
+    <section className="relative lg:min-h-screen flex items-center justify-center pt-28 sm:pt-32 lg:pt-40 pb-12 md:pb-16 overflow-hidden bg-gradient-to-br from-brand-light via-white to-brand-blue-light/20">
       {/* Decorative background blurs */}
       <div className="absolute top-1/4 left-1/10 w-96 h-96 rounded-full bg-brand-purple/5 blur-3xl -z-10 animate-float" />
       <div className="absolute bottom-1/4 right-1/10 w-96 h-96 rounded-full bg-brand-blue/5 blur-3xl -z-10 animate-pulse-slow" />
 
-      <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center w-full">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center w-full">
         {/* Left Content */}
-        <div className="lg:col-span-7 space-y-8 text-center lg:text-left z-10">
+        <div className="lg:col-span-7 space-y-6 md:space-y-8 text-center lg:text-left z-10">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-brand-purple/10 border border-brand-purple/20 text-brand-purple text-xs font-bold tracking-wide uppercase"
+            className="inline-flex items-center gap-2 px-3 sm:px-4 py-2 rounded-full bg-brand-purple/10 border border-brand-purple/20 text-brand-purple text-[10px] sm:text-xs font-bold tracking-wide uppercase"
           >
-            <span className="w-2 h-2 rounded-full bg-brand-purple animate-ping" />
+            <span className="w-2 h-2 shrink-0 rounded-full bg-brand-purple animate-ping" />
             Clínica de Fisioterapia e Pilates em Maricá
           </motion.div>
 
@@ -71,7 +61,7 @@ export default function Hero() {
             initial={{ opacity: 0, y: 25 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.1 }}
-            className="text-4xl md:text-5xl lg:text-6xl font-space font-bold text-brand-blue leading-[1.1] tracking-tight"
+            className="text-[2.5rem] sm:text-5xl lg:text-6xl font-space font-bold text-brand-blue leading-[1.1] tracking-tight"
           >
             Movimento é <br className="hidden md:inline" />
             <span className="gradient-text bg-gradient-to-r from-brand-blue to-brand-purple">qualidade de vida.</span>
@@ -104,7 +94,6 @@ export default function Hero() {
             </a>
             <a
               href="#especialidades"
-              onClick={handleScrollToSpecialties}
               className="w-full sm:w-auto flex items-center justify-center gap-2 bg-white hover:bg-slate-50 border border-slate-200 text-brand-blue px-8 py-4 rounded-full text-sm font-bold shadow-sm hover:shadow transition-all duration-300"
             >
               <span>Conheça nossos Serviços</span>
@@ -116,17 +105,16 @@ export default function Hero() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.8, delay: 0.5 }}
-            className="grid grid-cols-3 gap-4 pt-6 border-t border-slate-200/60 max-w-lg mx-auto lg:mx-0"
+            className="grid grid-cols-3 gap-2 sm:gap-4 pt-6 border-t border-slate-200/60 max-w-lg mx-auto lg:mx-0"
           >
             {STATS.map((stat, idx) => {
-              const Icon = stat.icon;
               return (
                 <div key={idx} className="text-center lg:text-left space-y-1">
                   <div className="flex items-center justify-center lg:justify-start gap-1.5 text-brand-blue font-space font-bold text-xl md:text-2xl">
                     <span>{counts[idx]}</span>
                     <span className="text-brand-purple">{stat.suffix}</span>
                   </div>
-                  <div className="text-[10px] md:text-xs font-bold tracking-wide text-brand-blue uppercase">
+                  <div className="text-[10px] md:text-xs font-bold tracking-wide text-brand-blue uppercase leading-tight">
                     {stat.label}
                   </div>
                   <div className="text-[9px] md:text-[10px] text-brand-muted hidden sm:block">
@@ -144,15 +132,16 @@ export default function Hero() {
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="relative w-full max-w-md aspect-[4/5] rounded-[2.5rem] overflow-hidden shadow-2xl border-4 border-white"
+            className="relative w-full max-w-sm sm:max-w-md aspect-[4/5] rounded-[2rem] sm:rounded-[2.5rem] overflow-hidden shadow-2xl border-4 border-white"
           >
             {/* Elegant Background Image */}
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
+            <Image
               src="https://images.unsplash.com/photo-1599447421416-3414500d18a5?q=80&w=1200&auto=format&fit=crop"
               alt="Pilates Clínico e Reabilitação em Maricá"
-              className="w-full h-full object-cover transition-transform duration-700 hover:scale-105"
-              loading="eager"
+              fill
+              preload
+              sizes="(min-width: 1024px) 448px, (min-width: 640px) 448px, 384px"
+              className="object-cover transition-transform duration-700 hover:scale-105"
             />
             {/* Overlay Gradient */}
             <div className="absolute inset-0 bg-gradient-to-t from-brand-blue/70 via-transparent to-transparent" />
@@ -162,7 +151,7 @@ export default function Hero() {
               initial={{ x: 50, opacity: 0 }}
               animate={{ x: 0, opacity: 1 }}
               transition={{ delay: 0.6, duration: 0.5 }}
-              className="absolute bottom-6 left-6 right-6 p-5 rounded-2xl glass shadow-lg text-left"
+              className="absolute bottom-4 left-4 right-4 sm:bottom-6 sm:left-6 sm:right-6 p-4 sm:p-5 rounded-2xl glass shadow-lg text-left"
             >
               <div className="flex items-start gap-3">
                 <div className="p-2.5 rounded-xl bg-brand-purple/10 text-brand-purple">

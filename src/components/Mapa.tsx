@@ -1,22 +1,19 @@
-'use client';
-
-import { motion } from 'framer-motion';
 import { MessageSquare, Phone, MapPin, ExternalLink } from 'lucide-react';
 
 export default function Mapa() {
   const mapEmbedUrl = "https://maps.google.com/maps?q=Av.+Maysa,+entre+a+rua+87+e+88+-+Cordeirinho,+Maric%C3%A1+-+RJ,+24921-456&t=&z=15&ie=UTF8&iwloc=&output=embed";
 
   return (
-    <section id="contato" className="py-24 bg-brand-light relative">
-      <div className="max-w-7xl mx-auto px-6">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-stretch">
+    <section id="contato" className="py-16 md:py-24 bg-brand-light relative">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-12 items-stretch">
           
           {/* Left Column: Contact details card */}
-          <div className="lg:col-span-5 flex flex-col justify-between space-y-8 bg-white p-8 md:p-10 rounded-[2.5rem] border border-slate-100 shadow-xl">
+          <div className="lg:col-span-5 flex flex-col justify-between space-y-8 bg-white p-6 sm:p-8 md:p-10 rounded-[2rem] md:rounded-[2.5rem] border border-slate-100 shadow-xl">
             <div className="space-y-6">
               <div className="space-y-4">
                 <span className="text-xs font-bold tracking-widest text-brand-purple uppercase">Agendamento & Localização</span>
-                <h2 className="text-3xl font-space font-bold text-brand-blue tracking-tight leading-tight">
+                <h2 className="text-2xl sm:text-3xl font-space font-bold text-brand-blue tracking-tight leading-tight">
                   Venha conhecer o nosso espaço
                 </h2>
                 <p className="text-xs md:text-sm text-brand-muted leading-relaxed">
@@ -92,7 +89,7 @@ export default function Mapa() {
           </div>
 
           {/* Right Column: Google Maps Frame */}
-          <div className="lg:col-span-7 w-full h-[400px] lg:h-auto min-h-[450px] relative rounded-[2.5rem] overflow-hidden border border-slate-100 shadow-xl">
+          <div className="lg:col-span-7 w-full h-[320px] sm:h-[400px] lg:h-auto lg:min-h-[450px] relative rounded-[2rem] md:rounded-[2.5rem] overflow-hidden border border-slate-100 shadow-xl">
             <iframe
               src={mapEmbedUrl}
               className="absolute inset-0 w-full h-full border-0"
@@ -102,15 +99,20 @@ export default function Mapa() {
               title="Localização da Clínica Espaço Reabilitar em Cordeirinho, Maricá"
             />
             {/* Elegant Floating maps tag */}
-            <div className="absolute top-4 left-4 p-4 rounded-2xl glass shadow-md max-w-[200px] hidden sm:block">
+            <a
+              href="https://maps.google.com/?q=26VV%2B72+Maric%C3%A1,+Rio+de+Janeiro"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="absolute top-3 left-3 sm:top-4 sm:left-4 p-3 sm:p-4 rounded-2xl glass shadow-md max-w-[200px] hover:bg-white/90 transition-colors"
+            >
               <div className="flex items-center gap-2 text-brand-blue font-space font-bold text-xs">
-                <span>Cordeirinho, Maricá</span>
+                <span>Abrir no Google Maps</span>
                 <ExternalLink className="w-3 h-3 text-brand-purple" />
               </div>
-              <p className="text-[10px] text-brand-muted mt-1 leading-snug">
+              <p className="hidden sm:block text-[10px] text-brand-muted mt-1 leading-snug">
                 Estacionamento fácil e atendimento em ambiente confortável planejado para você.
               </p>
-            </div>
+            </a>
           </div>
           
         </div>

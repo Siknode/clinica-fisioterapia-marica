@@ -1,8 +1,8 @@
 'use client';
 
 import { useState, useEffect, useRef } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { Bot, User, Send, RefreshCw, MessageSquareCode, CheckCircle2 } from 'lucide-react';
+import { motion, AnimatePresence, useInView } from 'framer-motion';
+import { Bot, User, RefreshCw, MessageSquareCode, CheckCircle2 } from 'lucide-react';
 
 interface Message {
   id: string;
@@ -11,7 +11,7 @@ interface Message {
   timestamp: string;
 }
 
-const CHAT_FLOW = [
+const CHAT_FLOW: { sender: 'patient' | 'ia'; text: string }[] = [
   { sender: 'patient', text: 'Tenho dores na coluna.' },
   { sender: 'ia', text: 'Vou ajudá-lo com isso. Há quanto tempo você sente essa dor?' },
   { sender: 'patient', text: 'Há três semanas.' },
@@ -19,63 +19,52 @@ const CHAT_FLOW = [
   { sender: 'ia', text: 'Deseja agendar sua avaliação física agora mesmo?' }
 ];
 
+const createMessage = (sender: Message['sender'], text: string): Message => ({
+  id: `${Date.now()}-${Math.random()}`,
+  sender,
+  text,
+  timestamp: new Date().toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' }),
+});
+
 export default function AssistenteIA() {
   const [messages, setMessages] = useState<Message[]>([]);
   const [currentStep, setCurrentStep] = useState(0);
-  const [isTyping, setIsTyping] = useState(false);
-  const chatEndRef = useRef<HTMLDivElement>(null);
+  const chatRef = useRef<HTMLDivElement>(null);
+  const panelRef = useRef<HTMLDivElement>(null);
+  // A simulação só começa quando o chat aparece na tela
+  const started = useInView(chatRef, { once: true, amount: 0.4 });
+
+  const isTyping = started && currentStep < CHAT_FLOW.length && CHAT_FLOW[currentStep].sender === 'ia';
 
   useEffect(() => {
-    if (currentStep < CHAT_FLOW.length) {
-      const nextMsg = CHAT_FLOW[currentStep];
+    if (!started || currentStep >= CHAT_FLOW.length) return;
+    const nextMsg = CHAT_FLOW[currentStep];
+    // IA "pensa" um pouco mais que o paciente para simular digitação
+    const timer = setTimeout(() => {
+      setMessages((prev) => [...prev, createMessage(nextMsg.sender, nextMsg.text)]);
+      setCurrentStep((step) => step + 1);
+    }, nextMsg.sender === 'ia' ? 1800 : 1200);
+    return () => clearTimeout(timer);
+  }, [started, currentStep]);
 
-      if (nextMsg.sender === 'ia') {
-        setIsTyping(true);
-        // Simulates typewriter/thinking delay
-        const timer = setTimeout(() => {
-          setIsTyping(false);
-          addMessage('ia', nextMsg.text);
-          setCurrentStep(currentStep + 1);
-        }, 1800);
-        return () => clearTimeout(timer);
-      } else {
-        // Patient message
-        const timer = setTimeout(() => {
-          addMessage('patient', nextMsg.text);
-          setCurrentStep(currentStep + 1);
-        }, 1200);
-        return () => clearTimeout(timer);
-      }
-    }
-  }, [currentStep]);
-
+  // Rola apenas o painel do chat (scrollIntoView puxava a página inteira)
   useEffect(() => {
-    chatEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+    const panel = panelRef.current;
+    if (panel) panel.scrollTo({ top: panel.scrollHeight, behavior: 'smooth' });
   }, [messages, isTyping]);
-
-  const addMessage = (sender: 'patient' | 'ia', text: string) => {
-    const newMsg: Message = {
-      id: Math.random().toString(),
-      sender,
-      text,
-      timestamp: new Date().toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' })
-    };
-    setMessages(prev => [...prev, newMsg]);
-  };
 
   const handleReset = () => {
     setMessages([]);
     setCurrentStep(0);
-    setIsTyping(false);
   };
 
   return (
-    <section id="triagem-ia" className="py-24 bg-white relative overflow-hidden">
+    <section id="triagem-ia" className="py-16 md:py-24 bg-white relative overflow-hidden">
       {/* Decorative cyber grid or lighting */}
       <div className="absolute top-0 right-1/4 w-96 h-96 rounded-full bg-brand-purple/5 blur-3xl -z-10 animate-float" />
       <div className="absolute bottom-0 left-1/4 w-96 h-96 rounded-full bg-brand-blue/5 blur-3xl -z-10 animate-pulse-slow" />
 
-      <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center">
         {/* Left text column */}
         <div className="lg:col-span-5 space-y-6 text-center lg:text-left">
           <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-brand-blue/5 border border-brand-blue/10 text-brand-blue text-xs font-bold uppercase tracking-widest">
@@ -107,21 +96,22 @@ export default function AssistenteIA() {
         {/* Right column: Interactive Chat Simulator */}
         <div className="lg:col-span-7 w-full flex justify-center">
           <motion.div
+            ref={chatRef}
             initial={{ opacity: 0, y: 35 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.7 }}
-            className="w-full max-w-lg aspect-[9/13] md:aspect-[9/11] rounded-[2.5rem] bg-brand-dark/95 border-4 border-slate-800 shadow-2xl flex flex-col justify-between overflow-hidden relative"
+            className="w-full max-w-lg h-[500px] sm:h-[560px] rounded-[2rem] sm:rounded-[2.5rem] bg-brand-dark/95 border-4 border-slate-800 shadow-2xl flex flex-col justify-between overflow-hidden relative"
           >
             {/* Chat header */}
-            <div className="bg-brand-dark px-6 py-4 border-b border-slate-800/80 flex items-center justify-between">
-              <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-full bg-brand-purple/20 border border-brand-purple/30 flex items-center justify-center text-brand-purple relative">
+            <div className="bg-brand-dark px-4 sm:px-6 py-4 border-b border-slate-800/80 flex items-center justify-between">
+              <div className="flex items-center gap-3 min-w-0">
+                <div className="w-10 h-10 shrink-0 rounded-full bg-brand-purple/20 border border-brand-purple/30 flex items-center justify-center text-brand-purple relative">
                   <Bot className="w-5 h-5" />
                   <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 border border-brand-dark absolute bottom-0 right-0 animate-pulse" />
                 </div>
                 <div>
-                  <h3 className="font-space font-bold text-sm text-white leading-none">Triagem Virtual Espaço Reabilitar</h3>
+                  <h3 className="font-space font-bold text-[13px] sm:text-sm text-white leading-tight truncate">Triagem Virtual Espaço Reabilitar</h3>
                   <span className="text-[10px] text-slate-400 font-sans mt-1 inline-block">Online &bull; Responde instantaneamente</span>
                 </div>
               </div>
@@ -138,7 +128,7 @@ export default function AssistenteIA() {
             </div>
 
             {/* Chat Messages Panel */}
-            <div className="flex-1 overflow-y-auto p-6 space-y-4 max-h-[350px]">
+            <div ref={panelRef} data-lenis-prevent className="flex-1 min-h-0 overflow-y-auto p-4 sm:p-6 space-y-4">
               {messages.length === 0 && !isTyping && (
                 <div className="h-full flex flex-col items-center justify-center text-center text-slate-500 space-y-2">
                   <Bot className="w-8 h-8 text-brand-purple/40" />
@@ -163,13 +153,13 @@ export default function AssistenteIA() {
                     </div>
 
                     {/* Balloon */}
-                    <div className={`max-w-[75%] p-3.5 rounded-2xl text-xs leading-relaxed ${
+                    <div className={`max-w-[80%] sm:max-w-[75%] p-3.5 rounded-2xl text-xs leading-relaxed ${
                       msg.sender === 'patient'
                         ? 'bg-brand-purple text-white rounded-tr-none'
                         : 'bg-slate-800 text-slate-100 rounded-tl-none border border-slate-700/30'
                     }`}>
                       <p className="font-sans">{msg.text}</p>
-                      <span className={`text-[8px] mt-1 block text-right ${
+                      <span className={`text-[9px] mt-1 block text-right ${
                         msg.sender === 'patient' ? 'text-white/60' : 'text-slate-400'
                       }`}>
                         {msg.timestamp}
@@ -192,7 +182,6 @@ export default function AssistenteIA() {
                   </div>
                 </div>
               )}
-              <div ref={chatEndRef} />
             </div>
 
             {/* Chat interactive footer buttons */}
@@ -220,9 +209,9 @@ export default function AssistenteIA() {
                   </button>
                 </motion.div>
               ) : (
-                <div className="flex items-center justify-between text-xs text-slate-500 font-sans px-2">
-                  <span>Chatbot simulando triagem automática...</span>
-                  <div className="flex items-center gap-1.5">
+                <div className="flex items-center justify-between gap-3 text-xs text-slate-500 font-sans px-2">
+                  <span className="truncate">Simulando triagem automática...</span>
+                  <div className="flex items-center gap-1.5 shrink-0">
                     <span className="w-2.5 h-2.5 rounded-full bg-brand-purple animate-pulse" />
                     <span>Interativo</span>
                   </div>

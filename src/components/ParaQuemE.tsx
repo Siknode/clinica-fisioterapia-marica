@@ -1,7 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { ShieldAlert, Activity, Heart, HelpCircle, Dumbbell, Star, Baby, Sparkles, Smile } from 'lucide-react';
+import { ShieldAlert, Activity, Heart, Dumbbell, Star, Baby, Sparkles, Smile } from 'lucide-react';
 
 const CONDICOES = [
   {
@@ -53,10 +53,10 @@ const CONDICOES = [
 
 export default function ParaQuemE() {
   return (
-    <section id="para-quem" className="py-24 bg-white relative overflow-hidden">
-      <div className="max-w-7xl mx-auto px-6">
+    <section id="para-quem" className="py-16 md:py-24 bg-white relative overflow-hidden">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6">
         {/* Header Section */}
-        <div className="text-center max-w-3xl mx-auto space-y-4 mb-16">
+        <div className="text-center max-w-3xl mx-auto space-y-4 mb-10 md:mb-16">
           <motion.span
             initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -87,7 +87,7 @@ export default function ParaQuemE() {
         </div>
 
         {/* Grid Container */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-6 md:gap-8">
           {CONDICOES.map((item, index) => {
             const Icon = item.icon;
             return (
@@ -97,15 +97,15 @@ export default function ParaQuemE() {
                 whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true, margin: '-50px' }}
                 transition={{ duration: 0.5, delay: index * 0.05 }}
-                className="p-6 md:p-8 rounded-[2rem] border border-slate-100 bg-slate-50/50 hover:bg-white hover:border-brand-green/20 hover:shadow-xl hover:shadow-brand-green/5 transition-all duration-300 flex items-start gap-5 group"
+                className="p-4 sm:p-6 md:p-8 rounded-3xl md:rounded-[2rem] border border-slate-100 bg-slate-50/50 hover:bg-white hover:border-brand-green/20 hover:shadow-xl hover:shadow-brand-green/5 transition-all duration-300 flex items-start gap-4 md:gap-5 group"
               >
                 {/* Icon Badge */}
-                <div className="w-12 h-12 rounded-2xl bg-white border border-slate-200/50 text-brand-blue flex items-center justify-center shrink-0 group-hover:bg-brand-green group-hover:text-white group-hover:border-transparent transition-all duration-300 shadow-sm">
+                <div className="w-10 h-10 md:w-12 md:h-12 rounded-xl md:rounded-2xl bg-white border border-slate-200/50 text-brand-blue flex items-center justify-center shrink-0 group-hover:bg-brand-green group-hover:text-white group-hover:border-transparent transition-all duration-300 shadow-sm">
                   <Icon className="w-5 h-5 stroke-[1.8]" />
                 </div>
 
                 {/* Content */}
-                <div className="space-y-2">
+                <div className="space-y-1 md:space-y-2">
                   <h3 className="font-space font-bold text-base md:text-lg text-brand-blue group-hover:text-brand-green transition-colors duration-300">
                     {item.title}
                   </h3>
