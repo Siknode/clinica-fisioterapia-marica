@@ -1,51 +1,62 @@
 'use client';
 
 import { useState } from 'react';
+import Image from 'next/image';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Calendar, Clock, ArrowUpRight } from 'lucide-react';
+import { Calendar, ArrowUpRight, Instagram } from 'lucide-react';
+import { instagramPost, site } from '@/lib/site';
 
-const CATEGORIES = ['Todos', 'Pilates', 'Coluna', 'Joelho', 'Idosos', 'Qualidade de Vida'];
+const CATEGORIES = ['Todos', 'Pilates', 'Fisioterapia', 'Bem-estar', 'Família'];
 
+// Posts reais do Instagram @espacoreabilitarmarica (resumo da legenda + link para o post)
 const ARTICLES = [
   {
-    category: 'Coluna',
-    title: '5 hábitos diários que causam dores na coluna e como evitá-los',
-    excerpt: 'Passar muitas horas sentado de forma incorreta ou levantar objetos pesados sem flexionar os joelhos pode desgastar seus discos vertebrais a longo prazo. Aprenda práticas posturais saudáveis.',
-    date: '24 Jun, 2026',
-    readTime: '4 min',
-    image: 'https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?q=80&w=600&auto=format&fit=crop',
+    category: 'Fisioterapia',
+    title: '3 dicas para quem está sentindo dores no joelho',
+    excerpt: 'Não ignore a dor, fortaleça a musculatura com orientação e procure um profissional: cada joelho precisa de cuidados específicos.',
+    date: '21 Out, 2026',
+    image: '/images/clinic_2.webp',
+    shortCode: 'DewlkhrRFHB',
   },
   {
     category: 'Pilates',
-    title: 'Pilates Clínico: O aliado número 1 no alívio de hérnia de disco',
-    excerpt: 'Diferente do Pilates tradicional, a modalidade clínica é totalmente focada na estabilização segmentar e reabilitação de patologias específicas da coluna vertebral, diminuindo a compressão discal.',
-    date: '18 Jun, 2026',
-    readTime: '5 min',
-    image: 'https://images.unsplash.com/photo-1518611012118-696072aa579a?q=80&w=600&auto=format&fit=crop',
+    title: '5 benefícios do Pilates que vão muito além da estética',
+    excerpt: 'Postura, força, mobilidade, consciência corporal e mais qualidade de vida. Pilates é sobre como o corpo funciona e como você se sente.',
+    date: '05 Out, 2026',
+    image: '/images/clinic_10.jpg',
+    shortCode: 'DeHBr5mxOYg',
   },
   {
-    category: 'Joelho',
-    title: 'Condromalácia patelar: Prevenção, fortalecimento e cuidados',
-    excerpt: 'Saiba por que o amolecimento da cartilagem da patela acontece frequentemente em jovens ativos e atletas, e como a musculação terapêutica aliada à fisioterapia resolve a dor de forma definitiva.',
-    date: '10 Jun, 2026',
-    readTime: '6 min',
-    image: 'https://images.unsplash.com/photo-1576091160550-2173dba999ef?q=80&w=600&auto=format&fit=crop',
+    category: 'Bem-estar',
+    title: 'Todo dia é dia de alongar',
+    excerpt: 'O alongamento melhora flexibilidade, mobilidade e amplitude dos movimentos. Não espere sentir dor para começar.',
+    date: '15 Out, 2026',
+    image: '/images/clinic_9.jpg',
+    shortCode: 'DegyUfFRsUN',
   },
   {
-    category: 'Idosos',
-    title: 'Mobilidade e equilíbrio: Como prevenir quedas na terceira idade',
-    excerpt: 'Quedas em idosos são sérias e podem causar fraturas graves. A fisioterapia preventiva trabalha fortalecimento dos membros inferiores, propriocepção e melhora expressiva do equilíbrio funcional.',
-    date: '02 Jun, 2026',
-    readTime: '4 min',
-    image: 'https://images.unsplash.com/photo-1576765608535-5f04d1e3f289?q=80&w=600&auto=format&fit=crop',
+    category: 'Bem-estar',
+    title: 'Massoterapia: cuidado para o corpo e a mente',
+    excerpt: 'Alívio de tensões, menos cansaço, melhora do sono e um momento de autocuidado. Seu corpo merece descanso.',
+    date: '20 Out, 2026',
+    image: '',
+    shortCode: 'DespJezMx-j',
   },
   {
-    category: 'Qualidade de Vida',
-    title: 'Alimentação anti-inflamatória no processo de reabilitação muscular',
-    excerpt: 'A nutrição integrativa tem um papel fundamental na dor crônica. Nutrientes e fitoquímicos específicos reduzem a inflamação sistêmica e aceleram a regeneração dos tecidos musculares pós-lesão.',
-    date: '28 Mai, 2026',
-    readTime: '5 min',
-    image: 'https://images.unsplash.com/photo-1490645935967-10de6ba17061?q=80&w=600&auto=format&fit=crop',
+    category: 'Família',
+    title: 'TDAH: muito além da falta de atenção',
+    excerpt: 'Com acolhimento, informação e acompanhamento adequado, é possível desenvolver estratégias para os desafios do dia a dia.',
+    date: '13 Out, 2026',
+    image: '',
+    shortCode: 'Decvt2chPGr',
+  },
+  {
+    category: 'Família',
+    title: 'Jiu-jitsu baby: pequenos no tamanho, gigantes no potencial',
+    excerpt: 'Coordenação motora, disciplina, confiança, respeito e socialização, tudo de forma divertida e adequada à idade.',
+    date: '20 Out, 2026',
+    image: '',
+    shortCode: 'Desoh-5sukS',
   },
 ];
 
@@ -57,30 +68,39 @@ export default function Blog() {
     : ARTICLES.filter(art => art.category === selectedCat);
 
   return (
-    <section id="blog" className="py-24 bg-brand-light relative">
-      <div className="max-w-7xl mx-auto px-6">
+    <section id="blog" className="py-16 md:py-24 bg-brand-light relative">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6">
         {/* Header Section */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-16">
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-10 md:mb-16">
           <div className="space-y-4 max-w-2xl">
-            <span className="text-xs font-bold tracking-widest text-brand-purple uppercase">Centro de Conhecimento</span>
+            <span className="text-xs font-bold tracking-widest text-brand-purple uppercase">Dicas do Instagram</span>
             <h2 className="text-3xl md:text-4xl font-space font-bold text-brand-blue tracking-tight">
-              Conteúdo científico traduzido para a sua saúde
+              Conteúdo para cuidar de você
             </h2>
             <p className="text-sm md:text-base text-brand-muted leading-relaxed">
-              Descubra artigos exclusivos escritos pela nossa equipe multidisciplinar, focados em prevenção, reabilitação e qualidade de vida.
+              Dicas de saúde e bem-estar publicadas pela equipe do Espaço Reabilitar no Instagram.
             </p>
           </div>
+          <a
+            href={site.instagramUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="self-start md:self-auto shrink-0 inline-flex items-center gap-2 bg-white hover:bg-slate-50 border border-slate-200 text-brand-blue font-bold px-6 py-3 rounded-full text-xs transition-all duration-300 shadow-sm"
+          >
+            <Instagram className="w-4 h-4" />
+            <span>@{site.instagram}</span>
+          </a>
         </div>
 
         {/* Filter categories tabs bar */}
-        <div className="flex flex-wrap items-center gap-2 mb-12 border-b border-slate-200/60 pb-6 overflow-x-auto scrollbar-none">
+        <div className="flex md:flex-wrap items-center gap-2 mb-8 md:mb-12 border-b border-slate-200/60 pb-4 md:pb-6 overflow-x-auto scrollbar-none -mx-4 px-4 sm:-mx-6 sm:px-6 md:mx-0 md:px-0">
           {CATEGORIES.map((cat) => {
             const isSelected = selectedCat === cat;
             return (
               <button
                 key={cat}
                 onClick={() => setSelectedCat(cat)}
-                className={`px-5 py-2.5 rounded-full text-xs font-bold transition-all duration-300 cursor-pointer ${
+                className={`shrink-0 whitespace-nowrap px-5 py-2.5 rounded-full text-xs font-bold transition-all duration-300 cursor-pointer ${
                   isSelected
                     ? 'bg-brand-purple text-white shadow-md shadow-brand-purple/10'
                     : 'bg-white hover:bg-slate-50 text-brand-blue border border-slate-200/50'
@@ -95,10 +115,10 @@ export default function Blog() {
         {/* Articles List / Grid with dynamic transition */}
         <motion.div
           layout
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+          className="flex md:grid md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-8 overflow-x-auto md:overflow-visible snap-x snap-mandatory scroll-px-4 sm:scroll-px-6 -mx-4 px-4 sm:-mx-6 sm:px-6 md:mx-0 md:px-0 pb-4 md:pb-0 scrollbar-none"
         >
           <AnimatePresence mode="popLayout">
-            {filteredArticles.map((article, index) => (
+            {filteredArticles.map((article) => (
               <motion.article
                 layout
                 key={article.title}
@@ -106,34 +126,36 @@ export default function Blog() {
                 animate={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0, scale: 0.95 }}
                 transition={{ duration: 0.4 }}
-                className="bg-white rounded-[2rem] overflow-hidden border border-slate-100 hover:border-brand-purple/20 shadow-md shadow-slate-100/55 hover:shadow-xl hover:shadow-brand-purple/5 transition-all duration-500 flex flex-col justify-between group"
+                className="w-[82%] sm:w-[60%] md:w-auto shrink-0 snap-start bg-white rounded-[2rem] overflow-hidden border border-slate-100 hover:border-brand-purple/20 shadow-md shadow-slate-100/55 hover:shadow-xl hover:shadow-brand-purple/5 transition-all duration-500 flex flex-col justify-between group"
               >
                 {/* Image Section */}
                 <div className="relative aspect-[16/10] w-full overflow-hidden">
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img
-                    src={article.image}
-                    alt={article.title}
-                    className="w-full h-full object-cover transition-transform duration-750 group-hover:scale-103"
-                    loading="lazy"
-                  />
+                  {article.image ? (
+                    <Image
+                      src={article.image}
+                      alt={article.title}
+                      fill
+                      sizes="(min-width: 1024px) 400px, (min-width: 768px) 50vw, 82vw"
+                      className="object-cover transition-transform duration-750 group-hover:scale-103"
+                    />
+                  ) : (
+                    <div className="absolute inset-0 bg-gradient-to-br from-brand-blue to-brand-purple flex items-center justify-center p-8">
+                      <span className="font-space font-bold text-white/90 text-lg text-center leading-snug">{article.title}</span>
+                    </div>
+                  )}
                   <div className="absolute top-4 left-4 px-3.5 py-1.5 rounded-full bg-white/90 backdrop-blur-md text-[10px] font-bold text-brand-blue uppercase tracking-wider border border-slate-100">
                     {article.category}
                   </div>
                 </div>
 
                 {/* Content Section */}
-                <div className="p-6 md:p-8 flex-1 flex flex-col justify-between space-y-6">
+                <div className="p-5 md:p-8 flex-1 flex flex-col justify-between space-y-5 md:space-y-6">
                   <div className="space-y-3">
                     {/* Date and Time */}
                     <div className="flex items-center gap-4 text-[10px] text-brand-muted font-bold uppercase tracking-wider">
                       <div className="flex items-center gap-1.5">
                         <Calendar className="w-3.5 h-3.5 text-brand-purple" />
                         <span>{article.date}</span>
-                      </div>
-                      <div className="flex items-center gap-1.5">
-                        <Clock className="w-3.5 h-3.5 text-brand-purple" />
-                        <span>{article.readTime}</span>
                       </div>
                     </div>
 
@@ -147,12 +169,12 @@ export default function Blog() {
 
                   {/* Read Article CTA */}
                   <a
-                    href={`https://wa.me/5521968993480?text=${encodeURIComponent(`Olá! Gostaria de receber o artigo completo sobre "${article.title}" no meu WhatsApp.`)}`}
+                    href={instagramPost(article.shortCode)}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="inline-flex items-center gap-2 text-xs font-bold text-brand-blue group-hover:text-brand-purple hover:underline decoration-brand-purple transition-colors cursor-pointer"
                   >
-                    <span>Ler Artigo Completo</span>
+                    <span>Ver post no Instagram</span>
                     <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
                   </a>
                 </div>
