@@ -23,7 +23,8 @@ Regras:
 - Mobile first: a maioria dos clientes abre o link pelo celular (WhatsApp).
 
 **Proposta comercial**: segue o modelo em `proposta/` ("Site Estruturado com SEO", página única A4).
-Gere com `proposta/gerar.mjs` (ver `proposta/README.md`); não mude textos, seções ou preço do modelo sem pedido.
+Gere com `proposta/gerar.mjs` (ver `proposta/README.md`). Preço padrão para todos os clientes: **R$ 600,00**
+(referência R$ 997,00). Não mude textos, seções ou preço do modelo sem pedido.
 
 Dados conferidos no Instagram: serviços (Pilates com fisioterapeuta, fisioterapia/reabilitação, massoterapia,
 psicologia, nutrição, psicopedagogia/reforço escolar, jiu-jitsu baby e kids, musculação com o CTS Cordeirinho),

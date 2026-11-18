@@ -13,7 +13,17 @@ if (!dadosPath) {
   process.exit(1);
 }
 
-const dados = JSON.parse(readFileSync(dadosPath, 'utf8'));
+// Valores padrão do modelo Siknode; o JSON do cliente só sobrescreve se precisar de algo diferente
+const PADRAO = {
+  servico: 'Site Estruturado com SEO',
+  prazo: '3 dias úteis',
+  preco: 'R$ 600,00',
+  preco_referencia: 'R$ 997,00',
+  whatsapp: '(21) 96605-2646',
+  whatsapp_e164: '5521966052646',
+};
+
+const dados = { ...PADRAO, ...JSON.parse(readFileSync(dadosPath, 'utf8')) };
 const logo = `data:image/png;base64,${readFileSync(join(here, 'siknode-logo.png')).toString('base64')}`;
 
 // Link do site pronto (opcional): deixe "site_pronto_url" vazio para seguir o modelo sem esse bloco

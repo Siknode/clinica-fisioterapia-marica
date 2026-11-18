@@ -1,16 +1,10 @@
 {
   "arquivo": "Proposta_Comercial_-_Site_Estruturado_com_SEO_-_Espaco_Reabilitar",
-  "servico": "Site Estruturado com SEO",
   "cliente": "Espaço Reabilitar Maricá",
   "cidade": "Maricá",
   "dominio_de": "da clínica",
   "retorno_para": "para a clínica",
   "dor": "Atualmente, clínicas como o Espaço Reabilitar sofrem com a <strong>dificuldade de gerar um fluxo previsível de novos pacientes particulares</strong> e manter a agenda ocupada sem depender exclusivamente de indicações, do algoritmo inconstante do Instagram ou de convênios. Este site foca em resolver exatamente essa dor:",
   "site_pronto_url": "https://clinica-fisioterapia-marica.vercel.app/",
-  "prazo": "3 dias úteis",
-  "preco": "R$ 600,00",
-  "preco_referencia": "R$ 997,00",
-  "validade": "25/11/2026",
-  "whatsapp": "(21) 96605-2646",
-  "whatsapp_e164": "5521966052646"
+  "validade": "25/11/2026"
 }

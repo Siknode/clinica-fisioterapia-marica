@@ -4,7 +4,10 @@ Modelo oficial das propostas para clientes cujo site de prospecção **já está
 página única A4, "Site Estruturado com SEO", com o mesmo texto, seções e preço do modelo aprovado.
 
 - `template.html`: layout e textos fixos do modelo (com `{{campos}}`)
-- `clientes/<cliente>.json`: o que muda por cliente (nome, cidade, dor, preço, link do site pronto)
+- `gerar.mjs`: gerador; traz os valores padrão do modelo (preço **R$ 600,00**, referência R$ 997,00, prazo de
+  3 dias úteis, WhatsApp da Siknode)
+- `clientes/<cliente>.json`: o que muda por cliente (nome, cidade, dor, validade, link do site pronto); só
+  inclua `preco` ou `prazo` se aquele cliente tiver condição diferente do padrão
 - `siknode-logo.png`: logo embutido no arquivo, para não aparecer quebrado
 - `saida/`: HTML e PDF gerados
 
