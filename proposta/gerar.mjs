@@ -26,6 +26,15 @@ const PADRAO = {
 };
 
 const dados = { ...PADRAO, ...JSON.parse(readFileSync(dadosPath, 'utf8')) };
+
+// Validade: se o JSON não fixar uma data, vale por DIAS_VALIDADE a partir do dia em que a proposta é gerada
+// (a proposta é enviada depois da reunião, então gere no dia do envio)
+const DIAS_VALIDADE = 7;
+if (!dados.validade) {
+  const limite = new Date();
+  limite.setDate(limite.getDate() + DIAS_VALIDADE);
+  dados.validade = limite.toLocaleDateString('pt-BR', { timeZone: 'America/Sao_Paulo' });
+}
 const logo = `data:image/png;base64,${readFileSync(join(here, 'siknode-logo.png')).toString('base64')}`;
 
 // Link do site pronto (opcional): deixe "site_pronto_url" vazio para seguir o modelo sem esse bloco

@@ -24,7 +24,8 @@ Regras:
 
 **Proposta comercial**: segue o modelo em `proposta/` ("Site Estruturado com SEO", página única A4).
 Gere com `proposta/gerar.mjs` (ver `proposta/README.md`). Site de uma página: **R$ 600,00 em até 3x no cartão**
-(referência R$ 997,00), prazo de **5 dias úteis**. Site com várias páginas (ex.: Centro Clínico Boaçu): **R$ 1.000,00 em até 4x no cartão** (referência R$ 1.997,00), prazo de **7 dias úteis**. Não mude textos, seções ou preço do modelo sem pedido.
+(referência R$ 997,00), prazo de **5 dias úteis**. Site com várias páginas (ex.: Centro Clínico Boaçu): **R$ 1.000,00 em até 4x no cartão** (referência R$ 1.997,00), prazo de **7 dias úteis**. A proposta só é enviada depois da reunião de fechamento: gere o PDF no dia do envio (validade automática de
+7 dias). Não mude textos, seções ou preço do modelo sem pedido.
 
 Dados conferidos no Instagram: serviços (Pilates com fisioterapeuta, fisioterapia/reabilitação, massoterapia,
 psicologia, nutrição, psicopedagogia/reforço escolar, jiu-jitsu baby e kids, musculação com o CTS Cordeirinho),
