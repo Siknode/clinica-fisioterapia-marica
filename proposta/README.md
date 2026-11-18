@@ -14,5 +14,5 @@ Gerar:
 NODE_PATH=/opt/node-tools/node_modules node proposta/gerar.mjs proposta/clientes/espaco-reabilitar.json
 ```
 
-Para um novo cliente, copie o JSON, troque os campos e gere de novo. O campo `site_pronto_url` adiciona
+O campo `validade` é a data até quando o preço vale (escassez real: honre a data). Para um novo cliente, copie o JSON, troque os campos e gere de novo. O campo `site_pronto_url` adiciona
 o link do site pronto logo abaixo do texto de abertura; deixe vazio para ficar idêntico ao modelo.
