@@ -22,6 +22,9 @@ Regras:
   projeto, para que o cliente abra o link sem login.
 - Mobile first: a maioria dos clientes abre o link pelo celular (WhatsApp).
 
+**Proposta comercial**: segue o modelo em `proposta/` ("Site Estruturado com SEO", página única A4).
+Gere com `proposta/gerar.mjs` (ver `proposta/README.md`); não mude textos, seções ou preço do modelo sem pedido.
+
 Dados conferidos no Instagram: serviços (Pilates com fisioterapeuta, fisioterapia/reabilitação, massoterapia,
 psicologia, nutrição, psicopedagogia/reforço escolar, jiu-jitsu baby e kids, musculação com o CTS Cordeirinho),
 telefones (21) 96899-3480 e (21) 98743-4973, agendamento online (maapp), responsável Dra. Fernanda Coutinho

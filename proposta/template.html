@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>Proposta Comercial - {{servico}} - {{cliente}}</title>
+<style>
+  @page { size: A4; margin: 0; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: Inter, "Segoe UI", Arial, sans-serif; color: #334155; font-size: 13px; line-height: 1.55; background: #fff; }
+  .page { width: 210mm; min-height: 297mm; padding: 18mm 18mm 0; position: relative; }
+  .header { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 14px 24px; border-radius: 10px; background: linear-gradient(90deg, #0f172a 0%, #1e3a8a 100%); color: #fff; }
+  .header .brand { display: flex; align-items: center; gap: 16px; }
+  .header img { height: 58px; width: auto; display: block; }
+  .header .eyebrow { font-size: 11px; font-weight: 700; letter-spacing: .12em; color: #93c5fd; text-transform: uppercase; }
+  .header h1 { font-size: 21px; font-weight: 800; letter-spacing: -.01em; }
+  .header .client { text-align: right; font-size: 12px; }
+  .header .client strong { font-weight: 700; }
+  .header .client span { display: block; color: #93c5fd; }
+  .promise { margin-top: 14px; padding: 12px 16px; border-left: 4px solid #16a34a; border-radius: 6px; background: #f0fdf4; color: #14532d; font-size: 13.5px; }
+  h2 { margin-top: 20px; padding-bottom: 6px; border-bottom: 3px solid #e2e8f0; color: #0284c7; font-size: 17px; font-weight: 800; }
+  p { margin-top: 8px; }
+  .grid { display: grid; grid-template-columns: 1.35fr 1fr; gap: 14px; margin-top: 12px; }
+  .box { padding: 12px 16px; border: 1px solid #e2e8f0; border-left-width: 4px; border-radius: 6px; background: #f8fafc; }
+  .box h3 { font-size: 14.5px; font-weight: 800; color: #1e293b; margin-bottom: 4px; }
+  .box.inclui { border-left-color: #0284c7; }
+  .box.nao { border-left-color: #64748b; color: #64748b; font-size: 12px; }
+  .box.nao h3 { color: #475569; }
+  .box.prazo { border-left-color: #16a34a; margin-top: 12px; font-size: 12px; }
+  .box.prazo h3 { color: #16a34a; }
+  ul { padding-left: 16px; }
+  li { margin-top: 5px; }
+  .price { display: flex; align-items: center; justify-content: space-between; margin-top: 16px; padding: 14px 18px; border: 1px solid #cbd5e1; border-radius: 8px; background: #f1f5f9; }
+  .price .label { font-size: 11px; font-weight: 700; letter-spacing: .04em; color: #64748b; text-transform: uppercase; }
+  .price .value { font-size: 24px; font-weight: 800; color: #0f172a; }
+  .price .ref { margin-left: 10px; font-size: 12px; color: #64748b; text-decoration: line-through; }
+  .price .cta { text-align: right; font-size: 12px; }
+  .price .cta strong { display: block; color: #0284c7; font-size: 13px; }
+  .site { margin-top: 14px; padding: 10px 16px; border: 1px dashed #93c5fd; border-radius: 6px; background: #eff6ff; font-size: 12.5px; }
+  .site a { color: #1d4ed8; font-weight: 700; }
+  .footer { position: absolute; left: 18mm; right: 18mm; bottom: 14mm; display: flex; align-items: center; justify-content: space-between; padding-top: 12px; border-top: 1px solid #e2e8f0; font-size: 12px; color: #64748b; }
+  .footer .wa { padding: 8px 14px; border-radius: 6px; background: #22c55e; color: #fff; font-weight: 700; text-decoration: none; }
+</style>
+</head>
+<body>
+<div class="page">
+  <header class="header">
+    <div class="brand">
+      <img src="{{logo}}" alt="Siknode Digital">
+      <div>
+        <div class="eyebrow">Proposta comercial • Página única</div>
+        <h1>{{servico}}</h1>
+      </div>
+    </div>
+    <div class="client"><strong>Cliente:</strong> {{cliente}}<span>Siknode Digital</span></div>
+  </header>
+
+  <div class="promise"><strong>Promessa:</strong> Seu negócio encontrado no Google por quem já procura o seu serviço na cidade, com um site que transforma a visita em conversa no WhatsApp.</div>
+
+  <h2>Por que este projeto resolve o seu momento atual?</h2>
+  <p>{{dor}}</p>
+
+  {{bloco_site}}
+
+  <div class="grid">
+    <div class="box inclui">
+      <h3>O que inclui no projeto:</h3>
+      <ul>
+        <li><strong>Pesquisa estratégica:</strong> Mapeamento das buscas do seu nicho em {{cidade}}.</li>
+        <li><strong>Site de uma página estruturado:</strong> Seções, títulos e perguntas frequentes focadas no Google.</li>
+        <li><strong>Copywriting de conversão:</strong> Textos persuasivos que direcionam direto ao WhatsApp.</li>
+        <li><strong>SEO Técnico completo:</strong> Título, descrição otimizada, versão para celular, carregamento ultrarrápido e marcação de negócio local (Schema).</li>
+        <li><strong>Publicação:</strong> Configuração final no domínio {{dominio_de}}.</li>
+      </ul>
+    </div>
+    <div>
+      <div class="box nao">
+        <h3>O que NÃO inclui:</h3>
+        Domínio e hospedagem, tráfego pago, social media e Google Meu Negócio (vendido à parte por especialistas).
+      </div>
+      <div class="box prazo">
+        <h3>Entrega &amp; Prazo:</h3>
+        <strong>Prazo:</strong> {{prazo}} após o recebimento dos dados.<br>
+        <strong>Formato:</strong> Site publicado, com o link e resumo executivo.
+      </div>
+    </div>
+  </div>
+
+  <h2>Por que a Siknode Digital e não o concorrente?</h2>
+  <p>Enquanto agências tradicionais entregam sites genéricos e lentos que servem apenas como "cartões de visitas digitais" invisíveis no Google, nós construímos uma estrutura focada em captura de intenção de compra. Unimos engenharia de SEO local com design focado em conversão para WhatsApp, garantindo que o seu investimento traga retorno real e previsível {{retorno_para}}.</p>
+
+  <div class="price">
+    <div>
+      <div class="label">Investimento condição promocional</div>
+      <span class="value">{{preco}}</span><span class="ref">Valor de referência: {{preco_referencia}}</span>
+    </div>
+    <div class="cta"><strong>Pronto para começar?</strong>Aproveite o prazo de {{prazo}}</div>
+  </div>
+
+  <footer class="footer">
+    <span>Siknode Digital • {{servico}} • {{cliente}}</span>
+    <a class="wa" href="{{whatsapp_url}}">WhatsApp: {{whatsapp}}</a>
+  </footer>
+</div>
+</body>
+</html>
