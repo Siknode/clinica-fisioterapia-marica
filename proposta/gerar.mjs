@@ -19,6 +19,8 @@ const PADRAO = {
   prazo: '3 dias úteis',
   preco: 'R$ 600,00',
   preco_referencia: 'R$ 997,00',
+  parcelas: 3, // sempre no cartão
+  item_site: '<strong>Site de uma página estruturado:</strong> Seções, títulos e perguntas frequentes focadas no Google.',
   whatsapp: '(21) 96605-2646',
   whatsapp_e164: '5521966052646',
 };
@@ -31,8 +33,14 @@ const blocoSite = dados.site_pronto_url
   ? `<div class="site"><strong>Seu site já está pronto para você ver:</strong> <a href="${dados.site_pronto_url}">${dados.site_pronto_url.replace(/^https?:\/\//, '').replace(/\/$/, '')}</a> (abra pelo celular)</div>`
   : '';
 
+// "R$ 1.000,00" -> 1000; a parcela é calculada a partir do preço
+const precoNumero = Number(dados.preco.replace(/[^\d,]/g, '').replace(',', '.'));
+const valorParcela = (precoNumero / dados.parcelas).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+
 const valores = {
   ...dados,
+  valor_parcela: valorParcela.replace(/\u00a0/g, ' '),
+  bloco_referencia: dados.preco_referencia ? `<span class="ref">Valor de referência: ${dados.preco_referencia}</span>` : '',
   logo,
   bloco_site: blocoSite,
   whatsapp_url: `https://wa.me/${dados.whatsapp_e164}`,

@@ -4,8 +4,8 @@ Modelo oficial das propostas para clientes cujo site de prospecção **já está
 página única A4, "Site Estruturado com SEO", com o mesmo texto, seções e preço do modelo aprovado.
 
 - `template.html`: layout e textos fixos do modelo (com `{{campos}}`)
-- `gerar.mjs`: gerador; traz os valores padrão do modelo (preço **R$ 600,00**, referência R$ 997,00, prazo de
-  3 dias úteis, WhatsApp da Siknode)
+- `gerar.mjs`: gerador; traz os valores padrão do modelo (preço **R$ 600,00 em até 3x no cartão**, referência
+  R$ 997,00, prazo de 3 dias úteis, WhatsApp da Siknode). A parcela é calculada a partir do preço.
 - `clientes/<cliente>.json`: o que muda por cliente (nome, cidade, dor, validade, link do site pronto); só
   inclua `preco` ou `prazo` se aquele cliente tiver condição diferente do padrão
 - `siknode-logo.png`: logo embutido no arquivo, para não aparecer quebrado
@@ -17,5 +17,8 @@ Gerar:
 NODE_PATH=/opt/node-tools/node_modules node proposta/gerar.mjs proposta/clientes/espaco-reabilitar.json
 ```
 
-O campo `validade` é a data até quando o preço vale (escassez real: honre a data). Para um novo cliente, copie o JSON, troque os campos e gere de novo. O campo `site_pronto_url` adiciona
+O campo `validade` é a data até quando o preço vale (escassez real: honre a data). **Exceção:** site com várias páginas (ex.: Centro Clínico Boaçu) custa **R$ 1.000,00 em até 4x no cartão**
+(`preco`, `parcelas` e `item_site` no JSON do cliente; `preco_referencia` vazio esconde o valor riscado).
+
+Para um novo cliente, copie o JSON, troque os campos e gere de novo. O campo `site_pronto_url` adiciona
 o link do site pronto logo abaixo do texto de abertura; deixe vazio para ficar idêntico ao modelo.
