@@ -16,7 +16,7 @@ if (!dadosPath) {
 // Valores padrão do modelo Siknode; o JSON do cliente só sobrescreve se precisar de algo diferente
 const PADRAO = {
   servico: 'Site Estruturado com SEO',
-  prazo: '3 dias úteis',
+  prazo: '5 dias úteis',
   preco: 'R$ 600,00',
   preco_referencia: 'R$ 997,00',
   parcelas: 3, // sempre no cartão
