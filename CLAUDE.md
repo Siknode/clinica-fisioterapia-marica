@@ -24,7 +24,7 @@ Regras:
 
 **Proposta comercial**: segue o modelo em `proposta/` ("Site Estruturado com SEO", página única A4).
 Gere com `proposta/gerar.mjs` (ver `proposta/README.md`). Preço padrão: **R$ 600,00 em até 3x no cartão**
-(referência R$ 997,00). Site com várias páginas (ex.: Centro Clínico Boaçu): **R$ 1.000,00 em até 4x no cartão**. Não mude textos, seções ou preço do modelo sem pedido.
+(referência R$ 997,00). Site com várias páginas (ex.: Centro Clínico Boaçu): **R$ 1.000,00 em até 4x no cartão** (referência R$ 1.997,00). Não mude textos, seções ou preço do modelo sem pedido.
 
 Dados conferidos no Instagram: serviços (Pilates com fisioterapeuta, fisioterapia/reabilitação, massoterapia,
 psicologia, nutrição, psicopedagogia/reforço escolar, jiu-jitsu baby e kids, musculação com o CTS Cordeirinho),

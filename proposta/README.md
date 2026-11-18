@@ -17,8 +17,8 @@ Gerar:
 NODE_PATH=/opt/node-tools/node_modules node proposta/gerar.mjs proposta/clientes/espaco-reabilitar.json
 ```
 
-O campo `validade` é a data até quando o preço vale (escassez real: honre a data). **Exceção:** site com várias páginas (ex.: Centro Clínico Boaçu) custa **R$ 1.000,00 em até 4x no cartão**
-(`preco`, `parcelas` e `item_site` no JSON do cliente; `preco_referencia` vazio esconde o valor riscado).
+O campo `validade` é a data até quando o preço vale (escassez real: honre a data). **Exceção:** site com várias páginas (ex.: Centro Clínico Boaçu) custa **R$ 1.000,00 em até 4x no cartão**, com referência R$ 1.997,00
+(`preco`, `preco_referencia`, `parcelas` e `item_site` no JSON do cliente; `preco_referencia` vazio esconde o valor riscado).
 
 Para um novo cliente, copie o JSON, troque os campos e gere de novo. O campo `site_pronto_url` adiciona
 o link do site pronto logo abaixo do texto de abertura; deixe vazio para ficar idêntico ao modelo.
